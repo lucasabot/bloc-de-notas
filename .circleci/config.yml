@@ -1,0 +1,109 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: 
+          name: Running eslint
+          command: yarn run lint
+  build-qa-metrogas:
+    docker:
+      - image: circleci/node:8
+    environment:
+      - REACT_APP_ENV: "qa"
+      - REACT_APP_ANALYTICS_TRACKING_ID: "UA-143746677-2"
+      - REACT_APP_API_BASE_URL: "https://private-008ce-energysimulatormetrogas.apiary-mock.com"
+      - REACT_APP_WEB_TITLE: "Consumo inteligente - MetroGAS"
+      - REACT_APP_FAVICON_URL: "https://utilitygo-energy-simulator-assets-dev.s3.amazonaws.com/metrogas/favicon.ico"
+      - REACT_APP_META_DESCRIPTION: "Usá el simulador de MetroGAS. Está buenísimo!"
+      - REACT_APP_UTILITY_URL: "https://utilitygo-energy-simulator-metrogas-qa.widergydev.com"
+      - REACT_APP_OG_IMAGE_URL: "https://utilitygo-energy-simulator-assets-dev.s3.amazonaws.com/metrogas/og_new.png"
+      - SASS_PATH: "src/scss/variables"
+    steps:
+      - checkout
+      - run: sudo apt install python-pip python-dev
+      - run: sudo pip install awscli
+      - run: aws configure set aws_access_key_id AKIAJMTZW45LP4NKYHDA
+      - run: aws configure set aws_secret_access_key $AWS_DEV_SECRET_ACCESS_KEY
+      - run: aws configure set default.region us-east-1
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_QA_TOKEN yarn build
+      - run: aws s3 sync --delete build/ s3://utilitygo-energy-simulator-metrogas-qa
+      - run: aws configure set preview.cloudfront true
+      - run: aws cloudfront create-invalidation --distribution-id E2LTNOIRYWJL3D --paths '/*'
+      - run:
+          name: Deployment notification to Rollbar
+          command: |
+            curl https://api.rollbar.com/api/1/deploy/ \
+            -F access_token=$ROLLBAR_QA_SERVER_TOKEN \
+            -F environment=metrogas \
+            -F revision=$CIRCLE_SHA1 \
+            -F local_username=$CIRCLE_USERNAME
+  build-prod-metrogas:
+    docker:
+      - image: circleci/node:8
+    environment:
+      - REACT_APP_ENV: "prod"
+      - REACT_APP_ANALYTICS_TRACKING_ID: "UA-143746677-1"
+      - REACT_APP_API_BASE_URL: "https://private-008ce-energysimulatormetrogas.apiary-mock.com/"
+      - REACT_APP_WEB_TITLE: "Consumo inteligente - MetroGAS"
+      - REACT_APP_FAVICON_URL: "https://utilitygo-energy-simulator-assets.s3.amazonaws.com/metrogas/favicon.ico"
+      - REACT_APP_UTILITY_URL: "consumointeligente.com.ar"
+      - REACT_APP_OG_IMAGE_URL: "https://utilitygo-energy-simulator-assets.s3.amazonaws.com/metrogas/og_metro.png"
+      - REACT_APP_META_DESCRIPTION: "Usá el simulador de MetroGAS. Está buenísimo!"
+      - SASS_PATH: "src/scss/variables"
+    steps:
+      - checkout
+      - run: sudo apt install python-pip python-dev
+      - run: sudo pip install awscli
+      - run: aws configure set aws_access_key_id AKIAIQ6TKRKZ6CFAA2RQ
+      - run: aws configure set aws_secret_access_key $AWS_PROD_SECRET_ACCESS_KEY
+      - run: aws configure set default.region us-east-1
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_PROD_TOKEN yarn run build
+      - run: aws s3 sync --delete build/ s3://utilitygo-energy-simulator-metrogas
+      - run: aws configure set preview.cloudfront true
+      - run: aws cloudfront create-invalidation --distribution-id E3K6LV08GANFUY --paths '/*'
+      - run:
+          name: Deployment notification to Rollbar
+          command: |
+            curl https://api.rollbar.com/api/1/deploy/ \
+            -F access_token=$ROLLBAR_PROD_SERVER_TOKEN \
+            -F environment=metrogas \
+            -F revision=$CIRCLE_SHA1 \
+            -F local_username=$CIRCLE_USERNAME
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - approval-metrogas:
+          type: approval
+          requires: 
+            - test
+          filters:
+            branches:
+              only: 
+                - qa
+                - master
+      - build-qa-metrogas:
+          requires:
+            - approval-metrogas
+          filters:
+            branches:
+              only: qa
+      - build-prod-metrogas:
+          requires:
+            - approval-metrogas
+          filters:
+            branches:
+              only: master

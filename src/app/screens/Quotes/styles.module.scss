@@ -1,0 +1,27 @@
+@import "scss/variables/_sizes.scss";
+@import "scss/variables/_colors.scss";
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - #{$topbar-heigth});
+  justify-content: flex-start;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+.form {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 220px;
+  width: 400px;
+}
+
+.formTitle {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
