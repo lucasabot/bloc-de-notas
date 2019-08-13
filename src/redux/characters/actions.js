@@ -11,7 +11,7 @@ const privateActionCreators = {
 
 export const actionCreators = {
   getQuotes: count => async dispatch => {
-    dispatch({ type: actions.GET_QUOTES, target: 'texts' });
+    dispatch({ type: actions.GET_QUOTES, target: 'quotes' });
     const response = await CharactersService.getQuotes(count);
     if (response.error) {
       dispatch(privateActionCreators.getQuotesFailure(response.error));

@@ -1,13 +1,8 @@
-import { shape, string, number, arrayOf } from 'prop-types';
+import { shape, string } from 'prop-types';
 
-export const applianceType = shape({
-  icon: string.isRequired,
-  iconGray: string.isRequired,
-  id: string.isRequired,
-  name: string.isRequired,
-  gas: number.isRequired,
-  electric: number.isRequired,
-  description: string.isRequired
+export const quoteType = shape({
+  character: string.isRequired,
+  characterDirection: string.isRequired,
+  image: string.isRequired,
+  quote: string.isRequired
 });
-
-export const appliancesListType = arrayOf(applianceType);

@@ -30,9 +30,9 @@ class AppContainer extends PureComponent {
   render() {
     return (
       <div>
-      <EnergyThemeProvider theme={energyUITheme}>
-        <App />
-      </EnergyThemeProvider>
+        <EnergyThemeProvider theme={energyUITheme}>
+          <App />
+        </EnergyThemeProvider>
       </div>
     );
   }

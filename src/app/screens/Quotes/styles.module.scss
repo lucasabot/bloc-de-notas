@@ -1,5 +1,6 @@
 @import "scss/variables/_sizes.scss";
 @import "scss/variables/_colors.scss";
+@import "scss/variables/_mediaQueries.scss";
 
 .container {
   align-items: center;
@@ -11,17 +12,25 @@
   width: 100%;
 }
 
-.form {
-  align-items: flex-end;
+.characters {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-around;
-  height: 220px;
-  width: 400px;
-}
-
-.formTitle {
-  margin-bottom: 20px;
+  margin-top: 20px;
   width: 100%;
 }
 
+.characterContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 350px;
+}
+
+.character {
+  height: 300px;
+  @media #{$mobile} {
+    height: 200px;
+  }
+}

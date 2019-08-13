@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { reducer as formReducer } from 'redux-form';
+import { fetchMiddleware } from 'redux-recompose';
 
 import AnalyticsMiddleware from '../services/AnalyticsService';
 
@@ -10,10 +11,26 @@ import { reducer as characters } from './characters/reducer';
 
 export const history = createBrowserHistory();
 
+const deleteValue = (state, action) => {
+  if (action.type === '@@redux-form/UNREGISTER_FIELD') {
+    if (state) {
+      const {
+        values: { [action.payload.name]: unregistered, ...values }
+      } = state;
+      return { ...state, values };
+    }
+  }
+  return state;
+};
+
+const form = formReducer.plugin({
+  UTFORM: deleteValue
+});
+
 const reducers = combineReducers({
   characters,
-  form: formReducer,
-  router: connectRouter(history)
+  router: connectRouter(history),
+  form
 });
 
 const middlewares = [routerMiddleware(history)];
@@ -24,6 +41,9 @@ middlewares.push(thunk);
 
 /* ------------- Analytics Middleware ------------- */
 middlewares.push(AnalyticsMiddleware);
+
+/* ------------- Redux-composer Middleware ------------- */
+middlewares.push(fetchMiddleware);
 
 /* ------------- Assemble Middleware ------------- */
 enhancers.push(applyMiddleware(...middlewares));

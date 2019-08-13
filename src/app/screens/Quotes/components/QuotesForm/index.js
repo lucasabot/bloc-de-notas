@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { UTLabel, UTButton } from '@widergy/energy-ui';
+import { handleKeyDown } from '@widergy/utilitygo-forms-web';
 import { reduxForm } from 'redux-form';
+import { func, bool } from 'prop-types';
+import i18 from 'i18next';
 
 import UTForm from 'app/components/UTForm';
 
@@ -11,18 +14,25 @@ const fields = [charactersCount];
 
 class Quotes extends PureComponent {
   render() {
+    const { invalid, submitFailed, handleSubmit } = this.props;
     return (
-      <form onSubmit={this.props.handleSubmit} className={styles.form}>
+      <form onKeyDown={handleKeyDown} onSubmit={handleSubmit} className={styles.form}>
         <UTLabel large semibold className={styles.formTitle}>
-          Cuántos personajes desea recuperar?
+          {i18.t('Quotes:formContent')}
         </UTLabel>
         <UTForm fields={fields} />
-        <UTButton text type="submit">
-          Consultar
+        <UTButton disabled={invalid && submitFailed} text type="submit">
+          {i18.t('Quotes:button')}
         </UTButton>
       </form>
     );
   }
 }
 
-export default reduxForm({ form: 'CharactersForm' })(Quotes);
+Quotes.propTypes = {
+  handleSubmit: func.isRequired,
+  invalid: bool,
+  submitFailed: bool
+};
+
+export default reduxForm({ form: 'CHARACTERS_FORM' })(Quotes);
