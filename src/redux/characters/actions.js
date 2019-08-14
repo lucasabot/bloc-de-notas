@@ -13,10 +13,10 @@ export const actionCreators = {
   getQuotes: count => async dispatch => {
     dispatch({ type: actions.GET_QUOTES, target: 'quotes' });
     const response = await CharactersService.getQuotes(count);
-    if (response.error) {
-      dispatch(privateActionCreators.getQuotesFailure(response.error));
-    } else {
+    if (response.ok) {
       dispatch(privateActionCreators.getQuotesSuccess(response.data));
+    } else {
+      dispatch(privateActionCreators.getQuotesFailure(response.error));
     }
   },
   resetQuotes: () => async dispatch => dispatch({ type: actions.RESET_QUOTES })

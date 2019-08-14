@@ -12,15 +12,3 @@ export const debounce = (func, wait, immediate) => {
     if (callNow) func.apply(context, args);
   };
 };
-
-export const findNextActive = (step, completedSteps, stepsAmount) => {
-  const nextStep = step + 1;
-  if (nextStep > stepsAmount) {
-    return completedSteps[completedSteps.length - 1];
-  }
-  if (!completedSteps.find(_step => _step === nextStep)) return nextStep;
-
-  return findNextActive(nextStep, completedSteps, stepsAmount);
-};
-
-export const getRandomArrItem = array => array[Math.floor(Math.random() * array.length)];

@@ -43,12 +43,12 @@
     "sass-lint": "^1.12.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node scripts/start",
+    "build": "node scripts/build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass-lint": "./node_modules/sass-lint/bin/sass-lint.js -v -q",
-    "lint": "./node_modules/eslint/bin/eslint.js src && npm run sass-lint",
+    "lint": "./node_modules/eslint/bin/eslint.js src && yarn sass-lint",
     "lint-fix": "./node_modules/eslint/bin/eslint.js src --fix",
     "lint-diff": "git diff --name-only --cached --relative --diff-filter=ACM | grep \\.js$ | xargs ./node_modules/eslint/bin/eslint.js"
   },

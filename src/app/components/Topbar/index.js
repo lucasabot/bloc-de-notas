@@ -1,7 +1,8 @@
 import React from 'react';
 import { UTLabel } from '@widergy/energy-ui';
 
-import logo from './assets/logoBlanco.png';
+import logo from 'app/assets/logoBlanco.png';
+
 import styles from './styles.module.scss';
 
 const Topbar = () => (

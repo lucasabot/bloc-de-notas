@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { StylesProvider } from '@material-ui/styles';
 
 import './scss/index.scss';
+import './config/analytics';
 import './config/i18n';
 import store from './redux/store';
 import { unregister } from './serviceWorker';

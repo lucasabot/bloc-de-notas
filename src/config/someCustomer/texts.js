@@ -1,16 +1,19 @@
 export default {
   es: {
     Home: {
-      title: 'This is the home page of Widergy - React App Bootstrap',
-      subtitle: 'Please press button to be redirected to Quotes Page',
-      button: 'Go to quotes!'
+      title: 'Esta es la página de bienvenida del template de proyecto React',
+      subtitle: 'Presioná el botón para navegar a la pagina de consulta de personajes',
+      button: 'Continuar'
     },
     Quotes: {
-      formContent: 'How many characters do you want to recover?',
-      required: 'Field required!',
-      invalidFormat: 'Invalid format',
-      button: 'Search!',
-      count: 'Count'
+      formContent: 'Cuantos personajes deseas recuperar?',
+      required: 'Campo requerido',
+      invalidFormat: 'Formato inválida',
+      button: 'Buscar',
+      count: 'Cantidad'
+    },
+    DefaultMessages: {
+      getQuotesFailure: 'Hubo un error al recuperar los personajes!'
     }
   }
 };

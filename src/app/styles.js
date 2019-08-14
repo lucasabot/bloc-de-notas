@@ -1,5 +1,7 @@
-import Colors from 'scss/variables/_colors.scss';
+import appConfig from 'config/appConfig';
 import FontSizes from 'scss/variables/_fontSizes.scss';
+
+const { Colors } = appConfig;
 
 export const energyUITheme = {
   UTTextInput: {
