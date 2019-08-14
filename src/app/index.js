@@ -16,7 +16,7 @@ class AppContainer extends PureComponent {
       captureUnhandledRejections: true,
       hostWhiteList: ['widergy.com', 'widergydev.com'],
       payload: {
-        environment: 'bootstrap-project'
+        environment: 'somecustomer'
       }
     });
     window.Rollbar = Rollbar;
