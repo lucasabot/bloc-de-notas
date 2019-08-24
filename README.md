@@ -10,23 +10,23 @@ A React base project for web apps with Widergy standard defaults
 
 ![Repo](https://funkyimg.com/i/2WgmW.png)
 
-- On repository settings add you and your team collaborators (Remember accept the invite 😅)
+- On repository settings add yourself and your team collaborators (Remember them to accept the invite 😅)
 
-- Clone repo locally
+- Clone the repo locally
 
-```
+```bash
 git clone https://github.com/widergy/your-app.git
 ```
 
 - Install dependencies
 
-```
+```bash
 Yarn install
 ```
 
-- Start server and launch project
+- Start server and launch the project
 
-```
+```bash
 Yarn start
 ```
 
@@ -34,7 +34,7 @@ Yarn start
 
 ## Project documentation
 
-All project features documentation are detailed on it's [wiki](https://github.com/widergy/react-app-bootstrap/wiki) 
+All project's features, and how to use them, are detailed on it's [wiki](https://github.com/widergy/react-app-bootstrap/wiki)
 
 ## License
 
