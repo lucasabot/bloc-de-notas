@@ -27,7 +27,7 @@ jobs:
       - run: 
           name: Installing dependencies
           command: yarn install
-      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_QA_TOKEN yarn build someCustomer
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_QA_TOKEN yarn build someCustomer qa
       - run: aws s3 sync --delete build/ s3://your-bucket-here
       - run: aws configure set preview.cloudfront true
       - run: aws cloudfront create-invalidation --distribution-id your-cloudfront-distribution-id --paths '/*'
@@ -55,7 +55,7 @@ jobs:
       - run: 
           name: Installing dependencies
           command: yarn install
-      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_PROD_TOKEN yarn build someCustomer
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_PROD_TOKEN yarn build someCustomer prod
       - run: aws s3 sync --delete build/ s3://your-production-bucket-here
       - run: aws configure set preview.cloudfront true
       - run: aws cloudfront create-invalidation --distribution-id your-production-cloudfront-distribution-id --paths '/*'
