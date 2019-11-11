@@ -54,7 +54,9 @@ if (customerEnvConfig[environment]) {
 If you need to download customer-specific assets from amazon S3
 you can uncomment this line, set the right s3 bucket and sync it here
 */
-// execSync(`aws s3 sync s3://utilitygo-application-assets/${customer} src/assets/ --delete`, { stdio: [0, 1, 2] });
+// execSync(`aws s3 sync s3://${CONFIG.ASSETS_BUCKET[environment]}/${customer} src/app/assets/ --delete`, {
+//   stdio: [0, 1, 2]
+// });
 
 // Then the app is builded with react-scripts, or you can set your prefered build script or steps
 execSync(`react-scripts build`, { stdio: [0, 1, 2] });
