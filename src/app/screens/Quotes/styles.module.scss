@@ -1,6 +1,6 @@
-@import "scss/variables/_sizes.scss";
-@import "scss/variables/_mediaQueries.scss";
-@import "_general.scss";
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_general.scss';
 @import '_colors.scss';
 
 .container {
@@ -34,9 +34,9 @@
 }
 
 .character {
-  height: 300px;
   @extend %character-#{$customer} !optional;
- 
+  height: 300px;
+
   @media #{$mobile} {
     height: 200px;
   }

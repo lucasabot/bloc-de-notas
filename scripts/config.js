@@ -10,13 +10,16 @@ exports.ENVIRONMENTS = ['dev', 'qa', 'prod'];
 exports.CUSTOMER_ENVIRONMENTS_CONF = {
   someCustomer: {
     dev: {
-      REACT_APP_GMAPS_API_KEY: 'Your google maps api key'
+      REACT_APP_GMAPS_API_KEY: 'Your google maps api key',
+      REACT_APP_ANALYTICS_TRACKING_ID: 'Your Analytics Tracking ID'
     },
     qa: {
-      REACT_APP_GMAPS_API_KEY: 'Your google maps api key'
+      REACT_APP_GMAPS_API_KEY: 'Your google maps api key',
+      REACT_APP_ANALYTICS_TRACKING_ID: 'Your Analytics Tracking ID'
     },
     prod: {
-      REACT_APP_GMAPS_API_KEY: 'Your google maps api key'
+      REACT_APP_GMAPS_API_KEY: 'Your google maps api key',
+      REACT_APP_ANALYTICS_TRACKING_ID: 'Your Analytics Tracking ID'
     }
   }
 };
