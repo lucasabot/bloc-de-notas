@@ -98,10 +98,13 @@ const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteL
       ) : (
         <div className={styles.spanContainer}>
           <div
+            role="textbox"
+            tabIndex={0}
             className={`${styles.span} ${styles.spanFontSizeMedium} ${styles.spanSizer} ${textClassNames.join(
               ' '
             )}`}
             onClick={toggleOpen}
+            onKeyDown={toggleOpen}
           >
             {value || placeholder}
           </div>
