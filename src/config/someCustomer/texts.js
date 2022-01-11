@@ -1,8 +1,8 @@
 export default {
   es: {
     Home: {
-      title: 'Esta es la página de bienvenida del template de proyecto React',
-      subtitle: 'Presioná el botón para navegar a la pagina de consulta de personajes',
+      title: 'Bienvenido al bloc de notas del training de ABOT',
+      subtitle: 'Presioná el botón para continuar',
       button: 'Continuar',
       blocButton: 'Ver bloc de notas'
     },
