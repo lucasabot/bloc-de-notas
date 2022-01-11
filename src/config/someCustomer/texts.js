@@ -3,7 +3,8 @@ export default {
     Home: {
       title: 'Esta es la página de bienvenida del template de proyecto React',
       subtitle: 'Presioná el botón para navegar a la pagina de consulta de personajes',
-      button: 'Continuar'
+      button: 'Continuar',
+      blocButton: 'Ver bloc de notas'
     },
     Quotes: {
       formContent: 'Cuantos personajes deseas recuperar?',

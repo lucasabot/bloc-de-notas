@@ -1,0 +1,15 @@
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_general.scss';
+@import '_colors.scss';
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - #{$topbar-heigth});
+  justify-content: flex-start;
+  padding: 40px 20px;
+  width: 100%;
+}

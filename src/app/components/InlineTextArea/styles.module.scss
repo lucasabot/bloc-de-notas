@@ -1,0 +1,55 @@
+@import '../../../scss/index.scss';
+
+.spanFontSize {
+  font-size: $small;
+}
+.spanFontSizeMedium {
+  font-size: $large;
+}
+.spanContainer {
+  width: 30rem;
+  min-height: 300px;
+}
+
+.spanSizer {
+  min-height: 10rem;
+}
+
+.textArea,
+.textArea:focus {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.deleteButton {
+  background-color: #ff6363 !important;
+  color: $white !important;
+}
+
+.wordsQuantitySpan {
+  font-size: $small;
+  font-style: italic;
+  color: $gray;
+}
+
+.clearButton {
+  color: $primary-button !important;
+  background-color: $white !important;
+  box-shadow: inset 0px 0px 0px 1px $primary-button;
+  margin-left: auto;
+}
+
+.clearButton:hover {
+  background-color: $primary-button !important;
+  color: $white !important;
+  border: none;
+  margin-left: auto;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bolder;
+}

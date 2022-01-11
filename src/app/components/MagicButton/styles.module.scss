@@ -1,0 +1,8 @@
+@import '../../../scss/index.scss';
+
+.button {
+  font-size: $medium;
+  padding: $medium/3 $medium !important;
+  min-width: fit-content !important;
+  margin: 0 0 0 0.3rem;
+}
