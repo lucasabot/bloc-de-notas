@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import propTypes from 'prop-types';
+import { string, oneOf } from 'prop-types';
 
 import styles from './styles.module.scss';
 
@@ -36,9 +36,9 @@ const InlineInput = ({ type, inputValue, placeholder, ...others }) => {
 };
 
 InlineInput.propTypes = {
-  inputValue: propTypes.string,
-  type: propTypes.oneOf(['text', 'number', 'password', 'email']),
-  placeholder: propTypes.string
+  inputValue: string,
+  type: oneOf(['text', 'number', 'password', 'email']),
+  placeholder: string
 };
 
 export default InlineInput;

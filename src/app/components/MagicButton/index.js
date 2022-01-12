@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import { object, string, func, oneOfType } from 'prop-types';
 import UTButton from '@widergy/energy-ui/dist/components/UTButton';
 
 import styles from './styles.module.scss';
@@ -11,9 +11,9 @@ const MagicButton = ({ buttonText, onClick, className = '' }) => (
 );
 
 MagicButton.propTypes = {
-  buttonText: propTypes.oneOf([propTypes.object, propTypes.string]),
-  onClick: propTypes.func,
-  className: propTypes.string
+  buttonText: oneOfType([object, string]),
+  onClick: func,
+  className: string
 };
 
 export default MagicButton;

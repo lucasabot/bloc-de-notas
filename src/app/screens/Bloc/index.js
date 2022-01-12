@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import i18 from 'i18next';
 
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
@@ -18,23 +19,33 @@ const Bloc = () => {
     setTextValue(e.target.value);
   };
 
+  const countWords = () =>
+    textValue
+      .split(' ')
+      .map(item =>
+        // Si tiene un espacio tengo que splittearlo
+        item.substring('\n') ? item.split('\n') : item
+      )
+      .flatMap(item => item) // subo los subArrays resultantes al mismo nivel que los strings
+      .filter(item => !!item).length; // filtro los espacios residuales y devuelvo el largo de mi array
+
   return (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <InlineInput
         type="text"
-        placeholder="Ingrese un titulo"
+        placeholder={i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         onChange={handleTitleChange}
       />
       <InlineTextArea
-        placeholder="Ingrese su texto"
+        placeholder={i18.t('Bloc:textInput')}
         value={textValue}
         onChange={handleTextValue}
         clearValue={() => setTextValue('')}
         deleteLastChar={() => setTextValue(textValue.slice(0, -1))}
-        wordsQuantity={textValue.length === 0 ? 0 : textValue.split(' ').length}
+        wordsQuantity={textValue.length === 0 ? 0 : countWords()}
       />
-    </section>
+    </div>
   );
 };
 

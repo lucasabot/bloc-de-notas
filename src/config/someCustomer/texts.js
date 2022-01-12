@@ -13,6 +13,13 @@ export default {
       button: 'Buscar',
       count: 'Cantidad'
     },
+    Bloc: {
+      titleInput: 'Ingrese un titulo',
+      textInput: 'Ingrese su texto',
+      inlineTextArea: {
+        words: 'Palabras'
+      }
+    },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!'
     }

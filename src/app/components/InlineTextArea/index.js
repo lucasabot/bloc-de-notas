@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import propTypes from 'prop-types';
+import React, { useState, useRef, useEffect, Fragment } from 'react';
+import { string, number, func } from 'prop-types';
+import i18 from 'i18next';
 
 import ButtonContainer from 'app/screens/Bloc/components/ButtonContainer';
 
 import MagicButton from '../MagicButton';
 
 import styles from './styles.module.scss';
+import { buttonsArray } from './utils';
+import { TEXTAREA_ROWS, TEXTAREA_COLS } from './constants';
 
 const CustomTextArea = ({ value, placeholder, classNames, toggle, ...others }) => {
   const inputRef = useRef(null);
@@ -17,15 +20,15 @@ const CustomTextArea = ({ value, placeholder, classNames, toggle, ...others }) =
 
   return (
     <textarea
-      cols="30"
-      rows="10"
+      cols={TEXTAREA_COLS}
+      rows={TEXTAREA_ROWS}
       ref={inputRef}
       placeholder={placeholder}
       className={`${styles.input} ${styles.textArea} ${classNames}`}
       value={value}
       {...others}
-      onClick={toggle}
-      onBlur={toggle}
+      onClick={() => toggle(true)}
+      onBlur={() => toggle(false)}
     />
   );
 };
@@ -34,8 +37,9 @@ const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteL
   const [open, setOpen] = useState(false);
   const [textClassNames, setTextClassNames] = useState([]);
 
-  const toggleOpen = () => {
-    setOpen(!open);
+  const toggleOpen = condition => {
+    if (String(condition)) setOpen(condition);
+    else setOpen(!open);
   };
 
   const setTextStyle = textStyle => {
@@ -46,53 +50,33 @@ const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteL
     }
   };
 
-  const buttonsFunctions = effect => {
-    switch (effect) {
-      case 'CLEAR':
-        setTextClassNames([]);
-        clearValue();
-        break;
-      case 'ITALIC':
-        setTextStyle(styles.italic);
-        break;
-      case 'BOLD':
-        setTextStyle(styles.bold);
-        break;
-      case 'DELETE':
-        deleteLastChar();
-        break;
-      default:
-        break;
-    }
-  };
-
-  const buttonsArray = [
-    {
-      buttonText: <b className={styles.spanFontSize}>CLEAR</b>,
-      onClick: () => buttonsFunctions('CLEAR'),
-      key: 'CLEAR',
-      className: styles.clearButton
-    },
-    {
-      buttonText: <i className={styles.spanFontSize}>Italic</i>,
-      onClick: () => buttonsFunctions('ITALIC'),
-      key: 'italic'
-    },
-    {
-      buttonText: <b className={styles.spanFontSize}>Bold</b>,
-      onClick: () => buttonsFunctions('BOLD'),
-      key: 'bold'
-    },
-    {
-      buttonText: <b className={styles.spanFontSize}>◄</b>,
-      onClick: () => buttonsFunctions('DELETE'),
-      key: 'DELETE',
-      className: styles.deleteButton
-    }
-  ];
+  const buttonsFunctions = effect =>
+    [
+      {
+        type: 'CLEAR',
+        action: () => {
+          setTextClassNames([]);
+          clearValue();
+        }
+      },
+      {
+        type: 'ITALIC',
+        action: () => setTextStyle(styles.italic)
+      },
+      {
+        type: 'BOLD',
+        action: () => setTextStyle(styles.bold)
+      },
+      {
+        type: 'DELETE',
+        action: () => deleteLastChar()
+      }
+    ]
+      .find(({ type }) => type === effect)
+      .action();
 
   return (
-    <>
+    <Fragment>
       {open ? (
         <CustomTextArea toggle={toggleOpen} value={value} classNames={textClassNames.join(' ')} {...others} />
       ) : (
@@ -111,33 +95,35 @@ const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteL
         </div>
       )}
       <ButtonContainer>
-        <span className={styles.wordsQuantitySpan}>{`Palabras: ${wordsQuantity}`}</span>
+        <span className={styles.wordsQuantitySpan}>{`${i18.t(
+          'Bloc:inlineTextArea:words'
+        )}: ${wordsQuantity}`}</span>
         {buttonsArray.map(item => (
           <MagicButton
             buttonText={item.buttonText}
-            onClick={item.onClick}
+            onClick={() => buttonsFunctions(item.key)}
             key={item.key}
             className={item.className}
           />
         ))}
       </ButtonContainer>
-    </>
+    </Fragment>
   );
 };
 
 InlineTextArea.propTypes = {
-  value: propTypes.string,
-  placeholder: propTypes.string,
-  wordsQuantity: propTypes.number,
-  clearValue: propTypes.func,
-  deleteLastChar: propTypes.func
+  value: string,
+  placeholder: string,
+  wordsQuantity: number,
+  clearValue: func,
+  deleteLastChar: func
 };
 
 CustomTextArea.propTypes = {
-  value: propTypes.string,
-  placeholder: propTypes.string,
-  toggle: propTypes.func,
-  classNames: propTypes.string
+  value: string,
+  placeholder: string,
+  toggle: func,
+  classNames: string
 };
 
 export default InlineTextArea;

@@ -42,6 +42,10 @@ button {
   border-bottom: 1px solid #666;
   margin-bottom: 2rem;
   resize: none;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .input:focus {
@@ -53,6 +57,10 @@ button {
   outline: none !important;
   border-bottom: 1px solid $primary-button-hover;
   margin-bottom: 2rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .span {
@@ -61,4 +69,8 @@ button {
   width: 30rem;
   font-size: $large * 2;
   cursor: pointer;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
 }

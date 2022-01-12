@@ -1,4 +1,5 @@
 @import '../../../scss/index.scss';
+@import 'scss/variables/_mediaQueries.scss';
 
 .spanFontSize {
   font-size: $small;
@@ -9,6 +10,10 @@
 .spanContainer {
   width: 30rem;
   min-height: 300px;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .spanSizer {
@@ -19,6 +24,10 @@
 .textArea:focus {
   padding: 0;
   margin-bottom: 0.5rem;
+  @media #{$mobile} {
+    width: 100%;
+    min-height: 50vh;
+  }
 }
 
 .deleteButton {
