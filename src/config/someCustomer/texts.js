@@ -4,7 +4,8 @@ export default {
       title: 'Bienvenido al bloc de notas del training de ABOT',
       subtitle: 'Presioná el botón para continuar',
       button: 'Continuar',
-      blocButton: 'Ver bloc de notas'
+      blocButton: 'Ver bloc de notas',
+      historyButton: 'Ver historial'
     },
     Quotes: {
       formContent: 'Cuantos personajes deseas recuperar?',
