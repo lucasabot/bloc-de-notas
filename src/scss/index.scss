@@ -1,6 +1,11 @@
 // sass-lint:disable no-url-domains
 // sass-lint:disable no-url-protocols
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700,900');
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_general.scss';
+@import '_colors.scss';
 
 html,
 body {
@@ -25,5 +30,47 @@ button {
   &::-moz-focus-inner {
     //Prevent firefox to add a dotted border when pressing a button
     border: 0;
+  }
+}
+
+.input {
+  font-family: 'Poppins', sans-serif;
+  width: 30rem;
+  font-size: $large;
+  padding: 0.5rem;
+  border: 0;
+  border-bottom: 1px solid #666;
+  margin-bottom: 2rem;
+  resize: none;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.input:focus {
+  font-family: 'Poppins', sans-serif;
+  width: 30rem;
+  font-size: $large;
+  padding: 0.5rem;
+  border: 0;
+  outline: none !important;
+  border-bottom: 1px solid $primary-button-hover;
+  margin-bottom: 2rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.span {
+  color: $gray;
+  font-family: 'Poppins', sans-serif;
+  width: 30rem;
+  font-size: $large * 2;
+  cursor: pointer;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
   }
 }
