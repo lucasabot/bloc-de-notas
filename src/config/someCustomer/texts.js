@@ -1,10 +1,15 @@
 export default {
   es: {
+    Topbar: {
+      title: 'Abloc de Notas',
+      backHomeButton: '↩ Home'
+    },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
       subtitle: 'Presioná el botón para continuar',
       button: 'Continuar',
-      blocButton: 'Ver bloc de notas'
+      blocButton: 'Ver bloc de notas',
+      historyButton: 'Ver historial'
     },
     Quotes: {
       formContent: 'Cuantos personajes deseas recuperar?',
@@ -20,6 +25,7 @@ export default {
         words: 'Palabras'
       }
     },
+    History: {},
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!'
     }

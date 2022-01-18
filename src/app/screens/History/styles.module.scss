@@ -1,4 +1,7 @@
 @import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_general.scss';
 @import '_colors.scss';
 
 .container {
@@ -9,19 +12,11 @@
   justify-content: flex-start;
   padding: 40px 20px;
   width: 100%;
-}
 
-.action {
-  margin: 40px;
-}
+  width: 100%;
 
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttonContainer button {
-  margin: 0 5px 0 5px;
+  @media #{$mobile} {
+    height: 200px;
+    width: 100%;
+  }
 }

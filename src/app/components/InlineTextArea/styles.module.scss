@@ -8,8 +8,9 @@
   font-size: $large;
 }
 .spanContainer {
-  width: 30rem;
   min-height: 300px;
+  width: 30rem;
+  word-wrap: break-word;
   @media #{$mobile} {
     height: 100%;
     width: 100%;
