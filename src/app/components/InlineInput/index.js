@@ -1,15 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { string, oneOf } from 'prop-types';
+import { string, oneOf, func } from 'prop-types';
 
 import styles from './styles.module.scss';
 
-const InlineInput = ({ type, inputValue, placeholder, ...others }) => {
+const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...others }) => {
   const [open, setOpen] = useState(false);
 
   const inputRef = useRef(null);
 
   const toggleOpen = () => {
     setOpen(!open);
+  };
+
+  const handleOnBlur = () => {
+    toggleOpen();
+    !!onBlur && onBlur();
   };
 
   useEffect(() => {
@@ -21,15 +26,15 @@ const InlineInput = ({ type, inputValue, placeholder, ...others }) => {
       ref={inputRef}
       type={type}
       placeholder={placeholder}
-      className={styles.input}
+      className={`${styles.input} ${className}`}
       value={inputValue}
       {...others}
       onClick={toggleOpen}
-      onBlur={toggleOpen}
+      onBlur={handleOnBlur}
     />
   ) : (
     // eslint-disable-next-line
-    <span onClick={toggleOpen} className={styles.span}>
+    <span onClick={toggleOpen} className={`${styles.span} ${className}`}>
       {inputValue || placeholder}
     </span>
   );
@@ -38,7 +43,9 @@ const InlineInput = ({ type, inputValue, placeholder, ...others }) => {
 InlineInput.propTypes = {
   inputValue: string,
   type: oneOf(['text', 'number', 'password', 'email']),
-  placeholder: string
+  placeholder: string,
+  onBlur: func,
+  className: string
 };
 
 export default InlineInput;

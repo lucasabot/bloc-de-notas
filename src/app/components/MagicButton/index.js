@@ -4,8 +4,8 @@ import UTButton from '@widergy/energy-ui/dist/components/UTButton';
 
 import styles from './styles.module.scss';
 
-const MagicButton = ({ buttonText, onClick, className = '' }) => (
-  <UTButton className={`${styles.button} ${className}`} onPress={onClick}>
+const MagicButton = ({ buttonText, onClick, className = '', ...others }) => (
+  <UTButton className={`${styles.button} ${className}`} onPress={onClick} {...others}>
     {buttonText}
   </UTButton>
 );

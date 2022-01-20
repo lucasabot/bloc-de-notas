@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react';
-import { string, number, func } from 'prop-types';
+import { string, number, func, arrayOf, bool, shape } from 'prop-types';
 import i18 from 'i18next';
 
-import ButtonContainer from 'app/screens/Bloc/components/ButtonContainer';
+import ButtonContainer from 'app/components/ButtonContainer';
+import useToastContext from 'utils/hooks/useToastContext';
 
 import MagicButton from '../MagicButton';
 
@@ -10,13 +11,18 @@ import styles from './styles.module.scss';
 import { buttonsArray } from './utils';
 import { TEXTAREA_ROWS, TEXTAREA_COLS } from './constants';
 
-const CustomTextArea = ({ value, placeholder, classNames, toggle, ...others }) => {
+const CustomTextArea = ({ value, placeholder, classNames, toggle, onBlur, ...others }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current.focus();
     inputRef.current.setSelectionRange(value.length, value.length); // Setea el cursor al final
   }, []);
+
+  const handleOnBlur = () => {
+    toggle(false);
+    if (onBlur) onBlur();
+  };
 
   return (
     <textarea
@@ -28,34 +34,48 @@ const CustomTextArea = ({ value, placeholder, classNames, toggle, ...others }) =
       value={value}
       {...others}
       onClick={() => toggle(true)}
-      onBlur={() => toggle(false)}
+      onBlur={handleOnBlur}
     />
   );
 };
 
-const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteLastChar, ...others }) => {
+const InlineTextArea = ({
+  value,
+  placeholder,
+  wordsQuantity,
+  clearValue,
+  deleteLastChar,
+  setTextStyle,
+  textClassNames,
+  classNames = {},
+  onBlur,
+  onSave,
+  clearOnSave,
+  ...others
+}) => {
   const [open, setOpen] = useState(false);
-  const [textClassNames, setTextClassNames] = useState([]);
+
+  const addToast = useToastContext();
 
   const toggleOpen = condition => {
     if (String(condition)) setOpen(condition);
     else setOpen(!open);
   };
 
-  const setTextStyle = textStyle => {
-    if (textClassNames.find(item => item === textStyle)) {
-      setTextClassNames(textClassNames.filter(item => item !== textStyle));
-    } else {
-      setTextClassNames([...textClassNames, textStyle]);
-    }
-  };
-
   const buttonsFunctions = effect =>
     [
       {
+        type: 'SAVE',
+        action: () => {
+          onSave();
+          if (clearOnSave) clearValue();
+          addToast(`Se guardo la nota correctamente.`);
+        }
+      },
+      {
         type: 'CLEAR',
         action: () => {
-          setTextClassNames([]);
+          setTextStyle('clear');
           clearValue();
         }
       },
@@ -78,24 +98,30 @@ const InlineTextArea = ({ value, placeholder, wordsQuantity, clearValue, deleteL
   return (
     <Fragment>
       {open ? (
-        <CustomTextArea toggle={toggleOpen} value={value} classNames={textClassNames.join(' ')} {...others} />
+        <CustomTextArea
+          toggle={toggleOpen}
+          value={value}
+          classNames={`${textClassNames.join(' ')} ${classNames.textArea}`}
+          onBlur={onBlur}
+          {...others}
+        />
       ) : (
-        <div className={styles.spanContainer}>
+        <div className={`${styles.spanContainer} ${textClassNames.join(' ')} ${classNames.span}`}>
           <div
             role="textbox"
             tabIndex={0}
             className={`${styles.span} ${styles.spanFontSizeMedium} ${styles.spanSizer} ${textClassNames.join(
               ' '
-            )}`}
+            )} ${classNames.text} `}
             onClick={toggleOpen}
             onKeyDown={toggleOpen}
           >
-            {value || placeholder}
+            {`${value || placeholder}`}
           </div>
         </div>
       )}
-      <ButtonContainer>
-        <span className={styles.wordsQuantitySpan}>{`${i18.t(
+      <ButtonContainer className={`${classNames.buttonContainer}`}>
+        <span className={`${styles.wordsQuantitySpan} ${textClassNames.join(' ')}`}>{`${i18.t(
           'Bloc:inlineTextArea:words'
         )}: ${wordsQuantity}`}</span>
         {buttonsArray.map(item => (
@@ -116,14 +142,26 @@ InlineTextArea.propTypes = {
   placeholder: string,
   wordsQuantity: number,
   clearValue: func,
-  deleteLastChar: func
+  deleteLastChar: func,
+  setTextStyle: func,
+  onBlur: func,
+  onSave: func,
+  clearOnSave: bool,
+  textClassNames: arrayOf(string),
+  classNames: shape({
+    span: string,
+    textArea: string,
+    buttonContainer: string,
+    text: string
+  })
 };
 
 CustomTextArea.propTypes = {
   value: string,
   placeholder: string,
   toggle: func,
-  classNames: string
+  classNames: string,
+  onBlur: func
 };
 
 export default InlineTextArea;

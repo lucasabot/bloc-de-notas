@@ -42,18 +42,32 @@
   color: $gray;
 }
 
+.saveButton {
+  background-color: $white !important;
+  box-shadow: inset 0px 0px 0px 1px #548cff;
+  margin: 0 0 0 auto;
+}
+
+.saveButton:hover {
+  background-color: rgba(84, 140, 255, 0.6) !important;
+}
+
+.saveButton span span {
+  padding: 0 3px 0 3px;
+  width: fit-content;
+}
+
 .clearButton {
   color: $primary-button !important;
   background-color: $white !important;
   box-shadow: inset 0px 0px 0px 1px $primary-button;
-  margin-left: auto;
 }
 
 .clearButton:hover {
   background-color: $primary-button !important;
   color: $white !important;
   border: none;
-  margin-left: auto;
+  // margin-left: auto;
 }
 
 .italic {

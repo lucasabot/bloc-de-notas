@@ -2,7 +2,10 @@ export default {
   es: {
     Topbar: {
       title: 'Abloc de Notas',
-      backHomeButton: '↩ Home'
+      backHomeButton: '↩ Home',
+      goHome: 'Inicio',
+      goBloc: 'Bloc',
+      goHistory: 'Historia'
     },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
@@ -25,7 +28,12 @@ export default {
         words: 'Palabras'
       }
     },
-    History: {},
+    History: {
+      title: 'Historial',
+      notesContainer: {
+        empty: 'No hay notas guardadas.'
+      }
+    },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!'
     }

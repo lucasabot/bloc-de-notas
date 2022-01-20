@@ -4,6 +4,15 @@ import styles from './styles.module.scss';
 
 export const buttonsArray = [
   {
+    buttonText: (
+      <span role="img" aria-label="guardar" className={styles.spanFontSize}>
+        💾
+      </span>
+    ),
+    key: 'SAVE',
+    className: styles.saveButton
+  },
+  {
     buttonText: <b className={styles.spanFontSize}>CLEAR</b>,
     key: 'CLEAR',
     className: styles.clearButton
