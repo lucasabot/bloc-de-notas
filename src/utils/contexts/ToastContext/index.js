@@ -12,7 +12,7 @@ export const ToastContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (toasts.length > 0) {
-      const timer = setTimeout(() => setToasts(toasts => toasts.slice(1)), 3000);
+      const timer = setTimeout(() => setToasts(() => toasts.slice(1)), 3000);
       return () => clearTimeout(timer);
     }
   }, [toasts]);

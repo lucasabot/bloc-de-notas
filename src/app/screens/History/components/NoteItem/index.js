@@ -11,6 +11,7 @@ import MagicButton from 'app/components/MagicButton';
 import NotesActions from 'redux/notes/actions';
 
 import styles from './styles.module.scss';
+
 const NoteItem = ({ note }) => {
   const [titleValue, setTitleValue] = useState(note.title);
   const [textValue, setTextValue] = useState(note.text);

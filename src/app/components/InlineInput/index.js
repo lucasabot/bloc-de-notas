@@ -14,7 +14,7 @@ const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...othe
 
   const handleOnBlur = () => {
     toggleOpen();
-    !!onBlur && onBlur();
+    if (onBlur) onBlur();
   };
 
   useEffect(() => {
