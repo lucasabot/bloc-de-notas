@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
 import InlineInput from 'app/components/InlineInput';
@@ -9,10 +9,12 @@ import { handleTextStyle, countWords } from 'utils/functionUtils';
 
 import styles from './styles.module.scss';
 
-const Bloc = ({ dispatch }) => {
+const Bloc = () => {
   const [titleValue, setTitleValue] = useState('');
   const [textValue, setTextValue] = useState('');
   const [textClassNames, setTextClassNames] = useState([]);
+
+  const dispatch = useDispatch();
 
   const setTextStyle = textStyle => {
     setTextClassNames(handleTextStyle(textStyle, textClassNames));
@@ -56,4 +58,4 @@ const Bloc = ({ dispatch }) => {
   );
 };
 
-export default connect()(Bloc);
+export default Bloc;

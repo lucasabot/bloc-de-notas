@@ -11,19 +11,25 @@ $primary-button: #00d564;
 $primary-button-hover: #00af52;
 $primary-text-button-hover: #d0f7e2;
 $topbar-background: #00d564;
+$save-button: rgba(84, 140, 255, 0.6);
+$save-button_shadow: #548cff;
+$delete-button: #ff6363;
 
 // sass-lint:disable no-misspelled-properties
 // sass-lint:disable property-sort-order
 :export {
   black: $black;
-  white: $white;
-  gray: $gray;
+  delete-button: $delete-button;
   disabledGray: $disabled-gray;
   dividerBase: $divider-base;
+  error: $error;
+  gray: $gray;
   inputPrimary: $input-primary;
   loadingBase: $loading-base;
-  error: $error;
   primaryButton: $primary-button;
   primaryButtonHover: $primary-button-hover;
   primaryTextButtonHover: $primary-text-button-hover;
+  save-button: $save-button;
+  save-button_shadow: $save-button_shadow;
+  white: $white;
 }

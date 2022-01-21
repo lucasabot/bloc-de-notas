@@ -30,12 +30,12 @@ export default {
     },
     History: {
       title: 'Historial',
-      notesContainer: {
-        empty: 'No hay notas guardadas.'
-      }
+      empty: 'No hay notas guardadas.'
     },
     DefaultMessages: {
-      getQuotesFailure: 'Hubo un error al recuperar los personajes!'
+      getQuotesFailure: 'Hubo un error al recuperar los personajes!',
+      deleteNoteSuccess: 'Se borro la nota correctamente.',
+      addNoteSuccess: `Se guardo la nota correctamente.`
     }
   }
 };

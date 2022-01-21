@@ -7,7 +7,7 @@ import useToastContext from 'utils/hooks/useToastContext';
 import { handleTextStyle, countWords } from 'utils/functionUtils';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
-import MagicButton from 'app/components/MagicButton';
+import NotepadButton from 'app/components/NotepadButton';
 import NotesActions from 'redux/notes/actions';
 
 import styles from './styles.module.scss';
@@ -30,7 +30,7 @@ const NoteItem = ({ note }) => {
 
   const handleSelfDelete = () => {
     dispatch(NotesActions.deleteNote(note));
-    addToast('Se borro la nota correctamente.', { style: 'danger' });
+    addToast(i18.t('DefaultMessages:deleteNoteSuccess'), { style: 'danger' });
   };
 
   const handleModification = () => {
@@ -48,7 +48,7 @@ const NoteItem = ({ note }) => {
 
   return (
     <div className={styles.noteItem_container}>
-      <MagicButton buttonText="X" onClick={handleSelfDelete} className={styles.noteItem_deleteButton} />
+      <NotepadButton buttonText="X" onClick={handleSelfDelete} className={styles.noteItem_deleteButton} />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
         inputValue={titleValue}

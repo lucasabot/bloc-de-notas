@@ -48,7 +48,7 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   align-self: flex-start;
   background-color: #ff6363 !important;
   color: $white;
-  font-size: $small * 0.9 !important;
+  font-size: 11px !important;
   margin: -8px 0 0 -20px;
   min-width: fit-content !important;
   padding: 0 10px 0 10px;
@@ -61,7 +61,7 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
 .topBarButton {
   box-shadow: none !important;
   height: 80px;
-  margin: 0px 3px 0px 3px;
+  margin: 0px 3px;
   min-width: 80px !important;
 }
 

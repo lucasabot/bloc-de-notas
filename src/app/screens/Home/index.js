@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { UTButton, UTLabel } from '@widergy/energy-ui';
 import i18 from 'i18next';
@@ -8,7 +8,9 @@ import { BLOC, HISTORY } from 'constants/routes';
 
 import styles from './styles.module.scss';
 
-const Home = ({ dispatch }) => {
+const Home = () => {
+  const dispatch = useDispatch();
+
   const goToBloc = useCallback(() => dispatch(push(BLOC), [dispatch]));
   const goToHistory = useCallback(() => dispatch(push(HISTORY), [dispatch]));
 
@@ -26,4 +28,4 @@ const Home = ({ dispatch }) => {
   );
 };
 
-export default connect()(Home);
+export default Home;

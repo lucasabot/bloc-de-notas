@@ -14,7 +14,7 @@ const NotesContainer = ({ notes = testNotes }) => (
       notes?.map(note => <NoteItem key={note.id} note={note} />)
     ) : (
       <UTLabel className={styles.notesContainer_emptyMsg} medium gray>
-        {i18.t('History:notesContainer:empty')}
+        {i18.t('History:empty')}
       </UTLabel>
     )}
   </div>

@@ -33,8 +33,13 @@ const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...othe
       onBlur={handleOnBlur}
     />
   ) : (
-    // eslint-disable-next-line
-    <span onClick={toggleOpen} className={`${styles.span} ${className}`}>
+    <span
+      onClick={toggleOpen}
+      onKeyDown={toggleOpen}
+      role="button"
+      tabIndex="0"
+      className={`${styles.span} ${className}`}
+    >
       {inputValue || placeholder}
     </span>
   );

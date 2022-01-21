@@ -16,13 +16,12 @@
   flex-direction: column;
   height: fit-content;
   justify-content: space-between;
-  margin: 6px 3px 6px 3px;
+  margin: 6px 3px;
   padding: 2px 16px;
   transition: 0.3s;
   width: 45%;
 }
 
-/* On mouse-over, add a deeper shadow */
 .noteItem_container:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }

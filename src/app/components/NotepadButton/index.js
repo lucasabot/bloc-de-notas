@@ -4,16 +4,16 @@ import UTButton from '@widergy/energy-ui/dist/components/UTButton';
 
 import styles from './styles.module.scss';
 
-const MagicButton = ({ buttonText, onClick, className = '', ...others }) => (
+const NotepadButton = ({ buttonText, onClick, className = '', ...others }) => (
   <UTButton className={`${styles.button} ${className}`} onPress={onClick} {...others}>
     {buttonText}
   </UTButton>
 );
 
-MagicButton.propTypes = {
+NotepadButton.propTypes = {
   buttonText: oneOfType([object, string]),
   onClick: func,
   className: string
 };
 
-export default MagicButton;
+export default NotepadButton;
