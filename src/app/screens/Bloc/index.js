@@ -52,6 +52,7 @@ const Bloc = () => {
         setTextStyle={setTextStyle}
         textClassNames={textClassNames}
         onSave={handleSaveNote}
+        canSave={textValue?.length > 0 && titleValue?.length > 0}
         clearOnSave
       />
     </div>

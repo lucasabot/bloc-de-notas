@@ -71,6 +71,7 @@ const NoteItem = ({ note }) => {
         setTextStyle={setTextStyle}
         textClassNames={textClassNames}
         onSave={handleModification}
+        canSave={textValue?.length > 0 && titleValue?.length > 0}
         classNames={{
           span: styles.noteItemTextSpan,
           textArea: styles.noteItemTextArea,

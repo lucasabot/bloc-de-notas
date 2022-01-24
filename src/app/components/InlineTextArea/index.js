@@ -23,6 +23,7 @@ const InlineTextArea = ({
   onBlur,
   onSave,
   clearOnSave,
+  canSave,
   ...others
 }) => {
   const [open, setOpen] = useState(false);
@@ -58,7 +59,7 @@ const InlineTextArea = ({
             onClick={toggleOpen}
             onKeyDown={toggleOpen}
           >
-            {`${value || placeholder}`}
+            {`${value || placeholder} `}
           </div>
         </div>
       )}
@@ -72,7 +73,7 @@ const InlineTextArea = ({
             onClick={() => handleNotePadButtons(item.key)}
             key={item.key}
             className={item.className}
-            disabled={open}
+            disabled={(item.key === 'SAVE' && !canSave) || open}
           />
         ))}
       </ButtonContainer>
