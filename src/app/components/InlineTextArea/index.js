@@ -72,6 +72,7 @@ const InlineTextArea = ({
             onClick={() => handleNotePadButtons(item.key)}
             key={item.key}
             className={item.className}
+            disabled={open}
           />
         ))}
       </ButtonContainer>

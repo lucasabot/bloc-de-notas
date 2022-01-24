@@ -36,6 +36,10 @@
   color: $white !important;
 }
 
+.deleteButton:disabled {
+  background-color: $delete-button-disabled !important;
+}
+
 .wordsQuantitySpan {
   color: $gray;
   font-size: $small;
@@ -61,6 +65,10 @@
   background-color: $white !important;
   box-shadow: inset 0px 0px 0px 1px $primary-button;
   color: $primary-button !important;
+}
+
+.clearButton:disabled {
+  color: $disabled-gray !important;
 }
 
 .clearButton:hover {
