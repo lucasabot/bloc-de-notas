@@ -35,7 +35,8 @@ export default {
       }
     },
     DefaultMessages: {
-      getQuotesFailure: 'Hubo un error al recuperar los personajes!'
+      getQuotesFailure: 'Hubo un error al recuperar los personajes!',
+      deleteNoteSuccess: `La nota se elimino correctamente`
     }
   }
 };

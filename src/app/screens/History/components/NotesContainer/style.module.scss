@@ -1,4 +1,5 @@
 @import 'scss/variables/_mediaQueries.scss';
+@import '_colors.scss';
 
 .notesContainer {
   display: flex;
@@ -7,7 +8,7 @@
   justify-content: space-evenly;
   width: 55%;
 
-  @media #{$mobile} {
+  @media #{$customMobile} {
     width: 100%;
   }
 }
@@ -17,4 +18,34 @@
   flex-direction: column;
   height: 100px;
   justify-content: center;
+}
+
+.spinnerContainer {
+  align-items: center;
+  color: $gray;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 20vh;
+  width: 100%;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+
+  border: 4px solid rgba($color: $primary-button, $alpha: 0.5);
+  border-left-color: transparent ;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100%  {
+    transform: rotate(360deg);
+  }
 }

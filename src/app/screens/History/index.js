@@ -1,22 +1,28 @@
-import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import UTLabel from '@widergy/energy-ui/dist/components/UTLabel';
 import i18 from 'i18next';
 
-import { getNotesSelector } from 'redux/notes/selectors';
+import NotesActions from 'redux/notes/actions';
 
 import NotesContainer from './components/NotesContainer';
 import styles from './styles.module.scss';
 
 const History = () => {
-  const notes = useSelector(getNotesSelector);
+  const dispatch = useDispatch();
+
+  const getNotesFromAPI = useCallback(() => dispatch(NotesActions.getNotes()), [dispatch]);
+
+  useEffect(() => {
+    getNotesFromAPI();
+  }, [getNotesFromAPI]);
 
   return (
     <div className={styles.container}>
       <UTLabel bold large black>
         {i18.t('History:title')}
       </UTLabel>
-      <NotesContainer notes={notes} />
+      <NotesContainer notes={useSelector(state => state.notes)} />
     </div>
   );
 };

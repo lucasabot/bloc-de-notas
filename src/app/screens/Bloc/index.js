@@ -5,17 +5,19 @@ import i18 from 'i18next';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
 import NotesActions from 'redux/notes/actions';
-import { handleTextStyle, countWords } from 'utils/functionUtils';
+import { countWords } from 'utils/functionUtils';
 
 import styles from './styles.module.scss';
 
 const Bloc = ({ dispatch }) => {
   const [titleValue, setTitleValue] = useState('');
   const [textValue, setTextValue] = useState('');
-  const [textClassNames, setTextClassNames] = useState([]);
+  const [italic, setItalic] = useState(false);
+  const [bold, setBold] = useState(false);
 
   const setTextStyle = textStyle => {
-    setTextClassNames(handleTextStyle(textStyle, textClassNames));
+    if (textStyle === 'bold') setBold(!bold);
+    if (textStyle === 'italic') setItalic(!italic);
   };
 
   const handleTitleChange = e => {
@@ -27,9 +29,10 @@ const Bloc = ({ dispatch }) => {
   };
 
   const handleSaveNote = () => {
-    dispatch(NotesActions.saveNote({ title: titleValue, text: textValue, style: textClassNames }));
+    dispatch(NotesActions.saveNote({ title: titleValue, content: textValue, italic, bold }));
     setTitleValue('');
-    setTextClassNames([]);
+    setItalic(false);
+    setBold(false);
   };
 
   return (
@@ -48,7 +51,7 @@ const Bloc = ({ dispatch }) => {
         deleteLastChar={() => setTextValue(textValue.slice(0, -1))}
         wordsQuantity={textValue.length === 0 ? 0 : countWords(textValue)}
         setTextStyle={setTextStyle}
-        textClassNames={textClassNames}
+        textClassNames={{ italic, bold }}
         onSave={handleSaveNote}
         clearOnSave
       />

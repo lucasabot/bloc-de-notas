@@ -31,3 +31,6 @@ export const buttonsArray = [
     className: styles.deleteButton
   }
 ];
+
+export const calcTextClassNames = textStyles =>
+  `${textStyles.bold && styles.bold} ${textStyles.italic && styles.italic}`;

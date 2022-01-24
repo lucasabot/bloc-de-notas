@@ -34,8 +34,11 @@ export const ToastContextProvider = ({ children }) => {
     <ToastContext.Provider value={addToast}>
       {children}
       <div className={styles.toastWrapper}>
-        {toasts.map(toast => (
-          <div className={`${toastStyle === 'success' ? styles.toastSuccess : styles.toastDanger}`}>
+        {toasts.map((toast, index) => (
+          <div
+            key={toast?.toast || `key ${index}`}
+            className={`${toastStyle === 'success' ? styles.toastSuccess : styles.toastDanger}`}
+          >
             {toast}
           </div>
         ))}
