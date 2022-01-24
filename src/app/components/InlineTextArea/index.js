@@ -91,6 +91,7 @@ InlineTextArea.propTypes = {
   onBlur: func,
   onSave: func,
   clearOnSave: bool,
+  canSave: bool,
   textClassNames: arrayOf(string),
   classNames: shape({
     span: string,

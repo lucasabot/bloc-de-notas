@@ -16,17 +16,11 @@ const Bloc = () => {
 
   const dispatch = useDispatch();
 
-  const setTextStyle = textStyle => {
-    setTextClassNames(handleTextStyle(textStyle, textClassNames));
-  };
+  const setTextStyle = textStyle => setTextClassNames(handleTextStyle(textStyle, textClassNames));
 
-  const handleTitleChange = e => {
-    setTitleValue(e.target.value);
-  };
+  const handleTitleChange = e => setTitleValue(e.target.value);
 
-  const handleTextValue = e => {
-    setTextValue(e.target.value);
-  };
+  const handleTextValue = e => setTextValue(e.target.value);
 
   const handleSaveNote = () => {
     dispatch(NotesActions.saveNote({ title: titleValue, text: textValue, style: textClassNames }));

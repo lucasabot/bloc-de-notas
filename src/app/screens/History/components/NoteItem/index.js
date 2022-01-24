@@ -24,13 +24,11 @@ const NoteItem = ({ note }) => {
   const handleTitleChange = e => setTitleValue(e.target.value);
   const handleTextChange = e => setTextValue(e.target.value);
 
-  const setTextStyle = textStyle => {
-    setTextClassNames(handleTextStyle(textStyle, textClassNames));
-  };
+  const setTextStyle = textStyle => setTextClassNames(handleTextStyle(textStyle, textClassNames));
 
   const handleSelfDelete = () => {
     dispatch(NotesActions.deleteNote(note));
-    addToast(i18.t('DefaultMessages:deleteNoteSuccess'), { style: 'danger' });
+    addToast(i18.t('DefaultMessages:deleteNoteSuccess', { title: note.title }), { style: 'danger' });
   };
 
   const handleModification = () => {

@@ -39,8 +39,8 @@ export default {
 
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
-      deleteNoteSuccess: 'Se borro la nota correctamente.',
-      addNoteSuccess: `Se guardo la nota correctamente.`
+      deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
+      addNoteSuccess: `Se guardo la nota {{title}} correctamente.`
     }
   }
 };

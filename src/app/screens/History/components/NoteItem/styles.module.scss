@@ -42,29 +42,29 @@
   box-shadow: none !important;
 }
 
-.noteItemTextArea {
+%baseSizing {
   font-size: $medium !important;
-  max-height: 200px !important;
   max-width: 100% !important;
   min-height: 0 !important;
 }
 
+.noteItemTextArea {
+  @extend %baseSizing;
+  max-height: 200px !important;
+}
+
 .noteItemTextSpan,
 .noteItemText {
-  font-size: $medium !important;
+  @extend %baseSizing;
   margin-bottom: 5px;
   max-height: 65px !important;
-  max-width: 100% !important;
-  min-height: 0 !important;
   overflow: hidden;
   white-space: break-spaces;
 }
 
 .noteItemButtonContainer {
-  font-size: $medium !important;
+  @extend %baseSizing;
   max-height: 100px !important;
-  max-width: 100% !important;
-  min-height: 0 !important;
   width: 100%;
     span {
       display: none !important;

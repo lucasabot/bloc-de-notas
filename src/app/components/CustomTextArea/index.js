@@ -9,7 +9,7 @@ const CustomTextArea = ({ value, placeholder, classNames, toggle, onBlur, ...oth
 
   useEffect(() => {
     inputRef.current.focus();
-    inputRef.current.setSelectionRange(value.length, value.length); // Setea el cursor al final
+    inputRef.current.setSelectionRange(value.length, value.length);
   }, []);
 
   const handleOnBlur = () => {

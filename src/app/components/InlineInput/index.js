@@ -8,9 +8,7 @@ const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...othe
 
   const inputRef = useRef(null);
 
-  const toggleOpen = () => {
-    setOpen(!open);
-  };
+  const toggleOpen = () => setOpen(!open);
 
   const handleOnBlur = () => {
     toggleOpen();
