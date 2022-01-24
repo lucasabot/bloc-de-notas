@@ -1,2 +1,48 @@
-@import '../../../scss/index.scss';
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700,900');
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
 @import 'scss/variables/_mediaQueries.scss';
+@import '_general.scss';
+@import '_colors.scss';
+
+.input {
+  border: 0;
+  border-bottom: 1px solid #666;
+  font-family: 'Poppins', sans-serif;
+  font-size: $large;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  resize: none;
+  width: 30rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.input:focus {
+  border: 0;
+  border-bottom: 1px solid $primary-button-hover;
+  font-family: 'Poppins', sans-serif;
+  font-size: $large;
+  margin-bottom: 2rem;
+  outline: none !important;
+  padding: 0.5rem;
+  width: 30rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.span {
+  color: $gray;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: $large * 2;
+  width: 30rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -14,6 +14,9 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   justify-content: space-between;
   padding: 20px;
   width: 100%;
+  @media #{$mobile} {
+    padding: 10px 0;
+  }
 }
 
 .container img {
@@ -40,8 +43,12 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
 
   @media #{$mobile} {
     height: auto;
-    width: 30%;
+    margin-left: 0 !important;
+    max-width: 95px;
+    object-fit: cover;
+    padding: 3px 8px;
   }
+
 }
 
 .backButton {
@@ -63,6 +70,11 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   height: 80px;
   margin: 0px 3px;
   min-width: 80px !important;
+
+  @media #{$small-mobile} {
+    margin: 0px 1px;
+    padding: 3px 8px
+  }
 }
 
 .topBarButton:disabled {

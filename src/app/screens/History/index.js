@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
-import UTLabel from '@widergy/energy-ui/dist/components/UTLabel';
+import { UTLabel } from '@widergy/energy-ui';
 import i18 from 'i18next';
 
 import NotesContainer from './components/NotesContainer';

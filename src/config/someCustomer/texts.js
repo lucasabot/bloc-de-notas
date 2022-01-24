@@ -26,7 +26,8 @@ export default {
       textInput: 'Ingrese su texto',
       inlineTextArea: {
         words: 'Palabras'
-      }
+      },
+      deleteNote: 'X'
     },
     History: {
       title: 'Historial',

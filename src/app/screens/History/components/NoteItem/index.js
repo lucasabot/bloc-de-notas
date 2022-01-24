@@ -47,13 +47,17 @@ const NoteItem = ({ note }) => {
   };
 
   return (
-    <div className={styles.noteItem_container}>
-      <NotepadButton buttonText="X" onClick={handleSelfDelete} className={styles.noteItem_deleteButton} />
+    <div className={styles.noteItemContainer}>
+      <NotepadButton
+        buttonText={i18.t('Bloc:deleteNote')}
+        onClick={handleSelfDelete}
+        className={styles.noteItemDeleteButton}
+      />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         type="text"
-        className={styles.noteItem_title}
+        className={styles.noteItemTitle}
         onChange={handleTitleChange}
       />
 
@@ -68,10 +72,10 @@ const NoteItem = ({ note }) => {
         textClassNames={textClassNames}
         onSave={handleModification}
         classNames={{
-          span: styles.noteItem_text_span,
-          textArea: styles.noteItem_text_textArea,
-          buttonContainer: styles.noteItem_buttonContainer,
-          text: styles.noteItem_text
+          span: styles.noteItemTextSpan,
+          textArea: styles.noteItemTextArea,
+          buttonContainer: styles.noteItemButtonContainer,
+          text: styles.noteItemText
         }}
       />
     </div>
