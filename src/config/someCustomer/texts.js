@@ -30,12 +30,13 @@ export default {
         emptyText: 'El titulo no puede estar vacio'
       },
       deleteNote: 'X'
-      }
     },
+
     History: {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
     },
+
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
       deleteNoteSuccess: 'Se borro la nota correctamente.',
