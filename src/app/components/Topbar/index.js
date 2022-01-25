@@ -11,7 +11,7 @@ import { HOME } from 'constants/routes';
 import { arrayButtons } from './utils';
 import styles from './styles.module.scss';
 
-const Topbar = ({ notesLoading }) => {
+const Topbar = ({ disableButtons }) => {
   const dispatch = useDispatch();
 
   const pathName = useLocation().pathname;
@@ -32,16 +32,18 @@ const Topbar = ({ notesLoading }) => {
         className={styles.logo}
         onKeyDown={() => goTo(HOME)}
         onClick={() => goTo(HOME)}
-        disabled={notesLoading}
+        disabled={disableButtons}
       />
     </div>
   );
 };
 
-const mapDispatchToProps = state => ({ notesLoading: state.notes.notesLoading });
+const mapDispatchToProps = state => ({
+  disableButtons: state.notes.notesLoading || state.notes.saveNotesLoading || state.notes.deleteNotesLoading
+});
 
 Topbar.propTypes = {
-  notesLoading: bool
+  disableButtons: bool
 };
 
 export default connect(mapDispatchToProps)(Topbar);

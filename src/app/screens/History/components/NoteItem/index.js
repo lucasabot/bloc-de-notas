@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { string, shape, number } from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18 from 'i18next';
 
 import { countWords } from 'utils/functionUtils';
@@ -22,6 +22,8 @@ const NoteItem = ({ note }) => {
   const addToast = useToastContext();
 
   const dispatch = useDispatch();
+
+  const deleteNoteLoading = useSelector(state => state.notes.deleteNoteLoading);
 
   const handleTitleChange = e => setTitleValue(e.target.value);
   const handleTextChange = e => setTextValue(e.target.value);
@@ -53,6 +55,7 @@ const NoteItem = ({ note }) => {
         buttonText={i18.t('Bloc:deleteNote')}
         onClick={handleSelfDelete}
         className={styles.noteItemDeleteButton}
+        disabled={deleteNoteLoading}
       />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
