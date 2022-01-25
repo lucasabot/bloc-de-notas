@@ -1,43 +1,15 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { string, number, func, bool, shape } from 'prop-types';
 import i18 from 'i18next';
 
 import ButtonContainer from 'app/components/ButtonContainer';
 import useToastContext from 'utils/hooks/useToastContext';
+import NotepadButton from 'app/components/NotepadButton';
+import CustomTextArea from 'app/components/CustomTextArea';
 
-import NotepadButton from '../NotepadButton';
-
+import { buttonsFunctions, calcTextClassNames } from './utils';
 import styles from './styles.module.scss';
-import { buttonsArray, calcTextClassNames } from './utils';
-import { TEXTAREA_ROWS, TEXTAREA_COLS } from './constants';
-
-const CustomTextArea = ({ value, placeholder, classNames, toggle, onBlur, ...others }) => {
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef.current.focus();
-    inputRef.current.setSelectionRange(value.length, value.length); // Setea el cursor al final
-  }, []);
-
-  const handleOnBlur = () => {
-    toggle(false);
-    if (onBlur) onBlur();
-  };
-
-  return (
-    <textarea
-      cols={TEXTAREA_COLS}
-      rows={TEXTAREA_ROWS}
-      ref={inputRef}
-      placeholder={placeholder}
-      className={`${styles.input} ${styles.textArea} ${classNames}`}
-      value={value}
-      {...others}
-      onClick={() => toggle(true)}
-      onBlur={handleOnBlur}
-    />
-  );
-};
+import { buttonsArray } from './constants';
 
 const InlineTextArea = ({
   value,
@@ -51,6 +23,8 @@ const InlineTextArea = ({
   onBlur,
   onSave,
   clearOnSave,
+  canSave,
+  isTitleOpen,
   ...others
 }) => {
   const [open, setOpen] = useState(false);
@@ -62,38 +36,8 @@ const InlineTextArea = ({
     else setOpen(!open);
   };
 
-  const buttonsFunctions = effect =>
-    [
-      {
-        type: 'SAVE',
-        action: () => {
-          onSave();
-          if (clearOnSave) clearValue();
-          addToast(`Se guardo la nota correctamente.`);
-        }
-      },
-      {
-        type: 'CLEAR',
-        action: () => {
-          setTextStyle('clear');
-          clearValue();
-        }
-      },
-      {
-        type: 'ITALIC',
-        action: () => setTextStyle('italic')
-      },
-      {
-        type: 'BOLD',
-        action: () => setTextStyle('bold')
-      },
-      {
-        type: 'DELETE',
-        action: () => deleteLastChar()
-      }
-    ]
-      .find(({ type }) => type === effect)
-      .action();
+  const handleNotePadButtons = buttonPresed =>
+    buttonsFunctions(buttonPresed, onSave, clearValue, clearOnSave, setTextStyle, deleteLastChar, addToast);
 
   return (
     <Fragment>
@@ -127,9 +71,10 @@ const InlineTextArea = ({
         {buttonsArray.map(item => (
           <NotepadButton
             buttonText={item.buttonText}
-            onClick={() => buttonsFunctions(item.key)}
+            onClick={() => handleNotePadButtons(item.key)}
             key={item.key}
             className={item.className}
+            disabled={(item.key === 'SAVE' && !canSave) || !value?.length > 0 || open || isTitleOpen}
           />
         ))}
       </ButtonContainer>
@@ -147,6 +92,8 @@ InlineTextArea.propTypes = {
   onBlur: func,
   onSave: func,
   clearOnSave: bool,
+  canSave: bool,
+  isTitleOpen: bool,
   textClassNames: shape({ italic: bool, bold: bool }),
   classNames: shape({
     span: string,
@@ -154,14 +101,6 @@ InlineTextArea.propTypes = {
     buttonContainer: string,
     text: string
   })
-};
-
-CustomTextArea.propTypes = {
-  value: string,
-  placeholder: string,
-  toggle: func,
-  classNames: string,
-  onBlur: func
 };
 
 export default InlineTextArea;

@@ -3,7 +3,7 @@ import { string, oneOf, func } from 'prop-types';
 
 import styles from './styles.module.scss';
 
-const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...others }) => {
+const InlineInput = ({ type, inputValue, placeholder, className, setIsTitleOpen, onBlur, ...others }) => {
   const [open, setOpen] = useState(false);
 
   const inputRef = useRef(null);
@@ -19,6 +19,7 @@ const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...othe
 
   useEffect(() => {
     if (open) inputRef.current.focus();
+    setIsTitleOpen(open);
   }, [open]);
 
   return open ? (
@@ -33,8 +34,13 @@ const InlineInput = ({ type, inputValue, placeholder, className, onBlur, ...othe
       onBlur={handleOnBlur}
     />
   ) : (
-    // eslint-disable-next-line
-    <span onClick={toggleOpen} className={`${styles.span} ${className}`}>
+    <span
+      onClick={toggleOpen}
+      onKeyDown={toggleOpen}
+      role="button"
+      tabIndex="0"
+      className={`${styles.span} ${className}`}
+    >
       {inputValue || placeholder}
     </span>
   );
@@ -45,6 +51,7 @@ InlineInput.propTypes = {
   type: oneOf(['text', 'number', 'password', 'email']),
   placeholder: string,
   onBlur: func,
+  setIsTitleOpen: func,
   className: string
 };
 

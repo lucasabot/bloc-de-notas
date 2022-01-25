@@ -1,6 +1,6 @@
 import React from 'react';
 import { object, string, func, oneOfType } from 'prop-types';
-import UTButton from '@widergy/energy-ui/dist/components/UTButton';
+import { UTButton } from '@widergy/energy-ui';
 
 import styles from './styles.module.scss';
 

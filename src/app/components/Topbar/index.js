@@ -4,56 +4,34 @@ import { connect, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { bool } from 'prop-types';
 import { useLocation } from 'react-router';
-import i18 from 'i18next';
 
 import logo from 'app/assets/logoBlanco.png';
-import { HOME, HISTORY, BLOC } from 'constants/routes';
+import { HOME } from 'constants/routes';
 
+import { arrayButtons } from './utils';
 import styles from './styles.module.scss';
 
 const Topbar = ({ notesLoading }) => {
   const dispatch = useDispatch();
 
-  const goToHome = useCallback(() => dispatch(push(HOME), [dispatch]));
-  const goToHistory = useCallback(() => dispatch(push(HISTORY), [dispatch]));
-  const goToAbloc = useCallback(() => dispatch(push(BLOC), [dispatch]));
-
   const pathName = useLocation().pathname;
+
+  const goTo = useCallback(route => dispatch(push(route)), [dispatch, push]);
+
+  const buttonsArray = arrayButtons(goTo, pathName);
 
   return (
     <div className={styles.container}>
-      <UTButton className={styles.topBarTitle} bold large white onPress={goToHome} disabled={notesLoading}>
-        {i18.t('Topbar:title')}
-      </UTButton>
-      <UTButton
-        className={styles.topBarButton}
-        onPress={goToHome}
-        disabled={notesLoading || [HOME, '/home'].includes(pathName)}
-      >
-        {i18.t('Topbar:goHome')}
-      </UTButton>
+      {buttonsArray.map(button => (
+        <UTButton {...button}>{button.label}</UTButton>
+      ))}
 
-      <UTButton
-        className={styles.topBarButton}
-        onPress={goToAbloc}
-        disabled={notesLoading || [BLOC].includes(pathName)}
-      >
-        {i18.t('Topbar:goBloc')}
-      </UTButton>
-
-      <UTButton
-        className={styles.topBarButton}
-        onPress={goToHistory}
-        disabled={notesLoading || [HISTORY].includes(pathName)}
-      >
-        {i18.t('Topbar:goHistory')}
-      </UTButton>
       <img
         alt="logo"
         src={logo}
         className={styles.logo}
-        onKeyDown={goToHome}
-        onClick={goToHome}
+        onKeyDown={() => goTo(HOME)}
+        onClick={() => goTo(HOME)}
         disabled={notesLoading}
       />
     </div>

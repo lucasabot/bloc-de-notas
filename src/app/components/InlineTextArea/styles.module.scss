@@ -23,23 +23,42 @@
 
 .textArea,
 .textArea:focus {
-  padding: 0;
   margin-bottom: 0.5rem;
+  padding: 0;
   @media #{$mobile} {
-    width: 100%;
     min-height: 50vh;
+    width: 100%;
   }
 }
 
 .deleteButton {
-  background-color: #ff6363 !important;
+  background-color: $delete-button !important;
   color: $white !important;
 }
 
+.deleteButton:disabled {
+  background-color: $delete-button-disabled !important;
+}
+
 .wordsQuantitySpan {
+  color: $gray;
   font-size: $small;
   font-style: italic;
-  color: $gray;
+}
+
+.saveButton {
+  background-color: $white !important;
+  box-shadow: inset 0px 0px 0px 1px $save-button_shadow;
+  margin: 0 0 0 auto;
+}
+
+.saveButton:hover {
+  background-color: $save-button !important;
+}
+
+.saveButton span span {
+  padding: 0 3px;
+  width: fit-content;
 }
 
 .saveButton {
@@ -58,16 +77,19 @@
 }
 
 .clearButton {
-  color: $primary-button !important;
   background-color: $white !important;
   box-shadow: inset 0px 0px 0px 1px $primary-button;
+  color: $primary-button !important;
+}
+
+.clearButton:disabled {
+  color: $disabled-gray !important;
 }
 
 .clearButton:hover {
   background-color: $primary-button !important;
-  color: $white !important;
   border: none;
-  // margin-left: auto;
+  color: $white !important;
 }
 
 .italic {

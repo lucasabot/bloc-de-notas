@@ -7,7 +7,7 @@ import { bool } from 'prop-types';
 import UTLoading from 'app/components/UTLoading';
 import CharactersActions from 'redux/characters/actions';
 import { quoteType } from 'types/quotesTypes';
-import useAnalytics from 'utils/hooks/useAnalytics';
+import useAnalytics from 'hooks/useAnalytics';
 import { categories, actions, labels } from 'constants/analytics';
 
 import QuotesForm from './components/QuotesForm';

@@ -3,11 +3,11 @@ import { string, shape, number } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
-import NotepadButton from 'app/components/NotepadButton';
 import { countWords } from 'utils/functionUtils';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
 import useToastContext from 'utils/hooks/useToastContext';
+import NotepadButton from 'app/components/NotepadButton';
 import NotesActions from 'redux/notes/actions';
 
 import styles from './styles.module.scss';
@@ -17,6 +17,7 @@ const NoteItem = ({ note }) => {
   const [textValue, setTextValue] = useState(note.content);
   const [italic, setItalic] = useState(note.italic);
   const [bold, setBold] = useState(note.bold);
+  const [isTitleOpen, setIsTitleOpen] = useState(false);
 
   const addToast = useToastContext();
 
@@ -30,11 +31,6 @@ const NoteItem = ({ note }) => {
     if (textStyle === 'italic') setItalic(!italic);
   };
 
-  const handleSelfDelete = () => {
-    dispatch(NotesActions.deleteNote(note));
-    addToast(i18.t('DefaultMessages:deleteNoteSuccess'), { style: 'danger' });
-  };
-
   const handleModification = () => {
     if (
       titleValue !== note.title ||
@@ -46,15 +42,25 @@ const NoteItem = ({ note }) => {
     }
   };
 
+  const handleSelfDelete = () => {
+    dispatch(NotesActions.deleteNote(note));
+    addToast(i18.t('DefaultMessages:deleteNoteSuccess', { title: note.title }), { style: 'danger' });
+  };
+
   return (
-    <div className={styles.noteItem_container}>
-      <NotepadButton buttonText="X" onClick={handleSelfDelete} className={styles.noteItem_deleteButton} />
+    <div className={styles.noteItemContainer}>
+      <NotepadButton
+        buttonText={i18.t('Bloc:deleteNote')}
+        onClick={handleSelfDelete}
+        className={styles.noteItemDeleteButton}
+      />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         type="text"
-        className={styles.noteItem_title}
+        className={styles.noteItemTitle}
         onChange={handleTitleChange}
+        setIsTitleOpen={setIsTitleOpen}
       />
 
       <InlineTextArea
@@ -67,11 +73,13 @@ const NoteItem = ({ note }) => {
         setTextStyle={setTextStyle}
         textClassNames={{ italic, bold }}
         onSave={handleModification}
+        canSave={textValue?.length > 0 && titleValue?.length > 0}
+        isTitleOpen={isTitleOpen}
         classNames={{
-          span: styles.noteItem_text_span,
-          textArea: styles.noteItem_text_textArea,
-          buttonContainer: styles.noteItem_buttonContainer,
-          text: styles.noteItem_text
+          span: styles.noteItemTextSpan,
+          textArea: styles.noteItemTextArea,
+          buttonContainer: styles.noteItemButtonContainer,
+          text: styles.noteItemText
         }}
       />
     </div>

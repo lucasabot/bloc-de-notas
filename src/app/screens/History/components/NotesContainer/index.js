@@ -18,8 +18,8 @@ const NotesContainer = ({ notes }) =>
       {notes.notes?.length > 0 ? (
         notes.notes?.map(note => <NoteItem key={note.id} note={note} />)
       ) : (
-        <UTLabel className={styles.notesContainer_emptyMsg} medium gray>
-          {i18.t('History:notesContainer:empty')}
+        <UTLabel className={styles.notesContainerEmptyMsg} medium gray>
+          {i18.t('History:empty')}
           {notes.notesError && i18.t(notes.notesError)}
         </UTLabel>
       )}

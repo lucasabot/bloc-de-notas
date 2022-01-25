@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
 import InlineInput from 'app/components/InlineInput';
@@ -9,7 +9,7 @@ import { countWords } from 'utils/functionUtils';
 
 import styles from './styles.module.scss';
 
-const Bloc = ({ dispatch }) => {
+const Bloc = () => {
   const [titleValue, setTitleValue] = useState('');
   const [textValue, setTextValue] = useState('');
   const [italic, setItalic] = useState(false);
@@ -19,14 +19,11 @@ const Bloc = ({ dispatch }) => {
     if (textStyle === 'bold') setBold(!bold);
     if (textStyle === 'italic') setItalic(!italic);
   };
+  const [isTitleOpen, setIsTitleOpen] = useState(false);
 
-  const handleTitleChange = e => {
-    setTitleValue(e.target.value);
-  };
+  const dispatch = useDispatch();
 
-  const handleTextValue = e => {
-    setTextValue(e.target.value);
-  };
+  const handleTitleChange = e => setTitleValue(e.target.value);
 
   const handleSaveNote = () => {
     dispatch(NotesActions.saveNote({ title: titleValue, content: textValue, italic, bold }));
@@ -35,6 +32,8 @@ const Bloc = ({ dispatch }) => {
     setBold(false);
   };
 
+  const handleTextValue = e => setTextValue(e.target.value);
+
   return (
     <div className={styles.container}>
       <InlineInput
@@ -42,6 +41,7 @@ const Bloc = ({ dispatch }) => {
         placeholder={i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         onChange={handleTitleChange}
+        setIsTitleOpen={setIsTitleOpen}
       />
       <InlineTextArea
         placeholder={i18.t('Bloc:textInput')}
@@ -53,10 +53,12 @@ const Bloc = ({ dispatch }) => {
         setTextStyle={setTextStyle}
         textClassNames={{ italic, bold }}
         onSave={handleSaveNote}
+        canSave={textValue?.length > 0 && titleValue?.length > 0}
+        isTitleOpen={isTitleOpen}
         clearOnSave
       />
     </div>
   );
 };
 
-export default connect()(Bloc);
+export default Bloc;

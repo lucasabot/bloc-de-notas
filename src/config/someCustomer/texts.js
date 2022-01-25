@@ -26,17 +26,19 @@ export default {
       textInput: 'Ingrese su texto',
       inlineTextArea: {
         words: 'Palabras'
-      }
+      },
+      deleteNote: 'X'
     },
+
     History: {
       title: 'Historial',
-      notesContainer: {
-        empty: 'No hay notas guardadas.'
-      }
+      empty: 'No hay notas guardadas.'
     },
+
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
-      deleteNoteSuccess: `La nota se elimino correctamente`
+      deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
+      addNoteSuccess: `Se guardo la nota {{title}} correctamente.`
     }
   }
 };
