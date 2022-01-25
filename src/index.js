@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { StylesProvider } from '@material-ui/styles';
 
+import { ToastContextProvider } from 'utils/contexts/ToastContext';
+
 import './scss/index.scss';
 import './config/analytics';
 import './config/i18n';
@@ -23,7 +25,9 @@ unregister();
 ReactDOM.render(
   <StylesProvider injectFirst>
     <Provider store={store}>
-      <App />
+      <ToastContextProvider>
+        <App />
+      </ToastContextProvider>
     </Provider>
   </StylesProvider>,
   document.getElementById('root')

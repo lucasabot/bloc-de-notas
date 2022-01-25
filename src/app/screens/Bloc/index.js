@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
+import NotesActions from 'redux/notes/actions';
+import { handleTextStyle, countWords } from 'utils/functionUtils';
 
 import styles from './styles.module.scss';
 
 const Bloc = () => {
   const [titleValue, setTitleValue] = useState('');
   const [textValue, setTextValue] = useState('');
+  const [textClassNames, setTextClassNames] = useState([]);
+  const [isTitleOpen, setIsTitleOpen] = useState(false);
 
-  const handleTitleChange = e => {
-    setTitleValue(e.target.value);
+  const dispatch = useDispatch();
+
+  const setTextStyle = textStyle => setTextClassNames(handleTextStyle(textStyle, textClassNames));
+
+  const handleTitleChange = e => setTitleValue(e.target.value);
+
+  const handleTextValue = e => setTextValue(e.target.value);
+
+  const handleSaveNote = () => {
+    dispatch(NotesActions.saveNote({ title: titleValue, text: textValue, style: textClassNames }));
+    setTitleValue('');
+    setTextClassNames([]);
   };
-
-  const handleTextValue = e => {
-    setTextValue(e.target.value);
-  };
-
-  const countWords = () =>
-    textValue
-      .split(' ')
-      .map(item =>
-        // Si tiene un espacio tengo que splittearlo
-        item.substring('\n') ? item.split('\n') : item
-      )
-      .flatMap(item => item) // subo los subArrays resultantes al mismo nivel que los strings
-      .filter(item => !!item).length; // filtro los espacios residuales y devuelvo el largo de mi array
 
   return (
     <div className={styles.container}>
@@ -36,6 +36,7 @@ const Bloc = () => {
         placeholder={i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         onChange={handleTitleChange}
+        setIsTitleOpen={setIsTitleOpen}
       />
       <InlineTextArea
         placeholder={i18.t('Bloc:textInput')}
@@ -43,10 +44,16 @@ const Bloc = () => {
         onChange={handleTextValue}
         clearValue={() => setTextValue('')}
         deleteLastChar={() => setTextValue(textValue.slice(0, -1))}
-        wordsQuantity={textValue.length === 0 ? 0 : countWords()}
+        wordsQuantity={textValue.length === 0 ? 0 : countWords(textValue)}
+        setTextStyle={setTextStyle}
+        textClassNames={textClassNames}
+        onSave={handleSaveNote}
+        canSave={textValue?.length > 0 && titleValue?.length > 0}
+        isTitleOpen={isTitleOpen}
+        clearOnSave
       />
     </div>
   );
 };
 
-export default connect()(Bloc);
+export default Bloc;

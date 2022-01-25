@@ -1,0 +1,79 @@
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import '_colors.scss';
+
+.noteItemTitle {
+  font-size: $large !important;
+  margin-bottom: 10px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.noteItemContainer {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: space-between;
+  margin: 6px 3px;
+  padding: 2px 16px;
+  transition: 0.3s;
+  width: 350px;
+}
+
+.noteItemContainer:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.noteItemDeleteButton {
+  align-self: flex-end;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #999 !important;
+  height: 20px;
+  margin-right: -20px;
+  width: 20px;
+}
+
+.noteItemDeleteButton:active {
+  background-color: none !important;
+  box-shadow: none !important;
+}
+
+%baseSizing {
+  font-size: $medium !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+}
+
+.noteItemTextArea {
+  @extend %baseSizing;
+  max-height: 200px !important;
+}
+
+.noteItemTextSpan,
+.noteItemText {
+  @extend %baseSizing;
+  margin-bottom: 5px;
+  max-height: 65px !important;
+  overflow: hidden;
+  white-space: break-spaces;
+}
+
+.noteItemButtonContainer {
+  @extend %baseSizing;
+  max-height: 100px !important;
+  width: 100%;
+    span {
+      display: none !important;
+      margin-bottom: auto;
+    }
+    button {
+      padding: 2.33px 7px !important;
+      span {
+        display: flex !important;
+      }
+    }
+}

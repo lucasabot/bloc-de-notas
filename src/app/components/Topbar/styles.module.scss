@@ -1,5 +1,6 @@
 @import 'scss/variables/_sizes.scss';
 @import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
 @import '_colors.scss';
 
 $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
@@ -13,27 +14,70 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   justify-content: space-between;
   padding: 20px;
   width: 100%;
+  @media #{$mobile} {
+    padding: 10px 0;
+  }
 }
 
 .container img {
   margin-left: auto;
 }
 
+.topBarTitle {
+  box-shadow: none !important;
+  margin-right: 10px;
+
+  @media #{$mobile} {
+    display: none;
+  }
+}
+
+.topBarTitle:hover {
+  background-color: inherit !important;
+  color: rgba(0, 0, 0, 0.4);
+}
+
 .logo {
-  height: calc(#{$topbar-heigth} - 40px);
   cursor: pointer;
+  height: calc(#{$topbar-heigth} - 40px);
+
+  @media #{$mobile} {
+    height: auto;
+    margin-left: 0 !important;
+    max-width: 95px;
+    object-fit: cover;
+    padding: 3px 8px;
+  }
+
 }
 
 .backButton {
-  font-size: $small * 0.9 !important;
+  align-self: flex-start;
   background-color: #ff6363 !important;
   color: $white;
-  padding: 0 10px 0 10px;
+  font-size: 11px !important;
   margin: -8px 0 0 -20px;
-  align-self: flex-start;
   min-width: fit-content !important;
+  padding: 0 10px 0 10px;
 }
 
 .backButton:hover {
   background-color: #c54a4a !important;
+}
+
+.topBarButton {
+  border-radius: 0;
+  box-shadow: none !important;
+  height: 80px;
+  margin: 0px 3px;
+  min-width: 80px !important;
+
+  @media #{$small-mobile} {
+    margin: 0px 1px;
+    padding: 3px 8px
+  }
+}
+
+.topBarButton:disabled {
+  color: $white !important;
 }

@@ -1,14 +1,14 @@
 @import 'scss/variables/_mediaQueries.scss';
 
 .buttonContainer {
-  width: 30rem;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-end;
   padding: 0.3rem;
+  width: 30rem;
 
   @media #{$mobile} {
-    width: 100%;
     flex-wrap: wrap;
+    width: 100%;
   }
 }

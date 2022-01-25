@@ -1,24 +1,50 @@
-import React from 'react';
+import i18 from 'i18next';
 
 import styles from './styles.module.scss';
 
-export const buttonsArray = [
-  {
-    buttonText: <b className={styles.spanFontSize}>CLEAR</b>,
-    key: 'CLEAR',
-    className: styles.clearButton
-  },
-  {
-    buttonText: <i className={styles.spanFontSize}>Italic</i>,
-    key: 'ITALIC'
-  },
-  {
-    buttonText: <b className={styles.spanFontSize}>Bold</b>,
-    key: 'BOLD'
-  },
-  {
-    buttonText: <b className={styles.spanFontSize}>◄</b>,
-    key: 'DELETE',
-    className: styles.deleteButton
-  }
-];
+export const buttonsFunctions = (
+  effect,
+  onSave,
+  clearValue,
+  clearOnSave,
+  setTextStyle,
+  deleteLastChar,
+  addToast
+) =>
+  [
+    {
+      type: 'SAVE',
+      action: () => {
+        onSave();
+        if (clearOnSave) clearValue();
+        addToast(i18.t('DefaultMessages:addNoteSuccess'));
+      }
+    },
+    {
+      type: 'CLEAR',
+      action: () => {
+        setTextStyle('clear');
+        clearValue();
+      }
+    },
+    {
+      type: 'ITALIC',
+      action: () => setTextStyle(styles.italic)
+    },
+    {
+      type: 'BOLD',
+      action: () => setTextStyle(styles.bold)
+    },
+    {
+      type: 'DELETE',
+      action: () => deleteLastChar()
+    }
+  ]
+    .find(({ type }) => type === effect)
+    .action();
+
+export const calcIfButtonDisabled = (key, canSave, isTextOpen, isTitleOpen, canApplyStyles) => {
+  if (isTextOpen || isTitleOpen) return true;
+  if (key === 'SAVE' && !canSave) return true;
+  if ((key === 'BOLD' || key === 'ITALIC') && !canApplyStyles) return true;
+};

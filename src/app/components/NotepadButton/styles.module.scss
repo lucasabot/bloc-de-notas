@@ -2,9 +2,9 @@
 
 .button {
   font-size: $medium;
-  padding: $medium/3 $medium !important;
-  min-width: fit-content !important;
   margin: 0 0 0 0.3rem;
+  min-width: fit-content !important;
+  padding: 4.66px $medium !important;
 
   @media #{$mobile} {
     margin-bottom: 0.3rem;

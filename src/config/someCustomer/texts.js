@@ -2,7 +2,10 @@ export default {
   es: {
     Topbar: {
       title: 'Abloc de Notas',
-      backHomeButton: '↩ Home'
+      backHomeButton: '↩ Home',
+      goHome: 'Inicio',
+      goBloc: 'Bloc',
+      goHistory: 'Historia'
     },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
@@ -23,11 +26,19 @@ export default {
       textInput: 'Ingrese su texto',
       inlineTextArea: {
         words: 'Palabras'
-      }
+      },
+      deleteNote: 'X'
     },
-    History: {},
+
+    History: {
+      title: 'Historial',
+      empty: 'No hay notas guardadas.'
+    },
+
     DefaultMessages: {
-      getQuotesFailure: 'Hubo un error al recuperar los personajes!'
+      getQuotesFailure: 'Hubo un error al recuperar los personajes!',
+      deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
+      addNoteSuccess: `Se guardo la nota {{title}} correctamente.`
     }
   }
 };
