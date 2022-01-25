@@ -13,6 +13,7 @@ const Bloc = () => {
   const [titleValue, setTitleValue] = useState('');
   const [textValue, setTextValue] = useState('');
   const [textClassNames, setTextClassNames] = useState([]);
+  const [isTitleOpen, setIsTitleOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ const Bloc = () => {
         placeholder={i18.t('Bloc:titleInput')}
         inputValue={titleValue}
         onChange={handleTitleChange}
+        setIsTitleOpen={setIsTitleOpen}
       />
       <InlineTextArea
         placeholder={i18.t('Bloc:textInput')}
@@ -47,6 +49,7 @@ const Bloc = () => {
         textClassNames={textClassNames}
         onSave={handleSaveNote}
         canSave={textValue?.length > 0 && titleValue?.length > 0}
+        isTitleOpen={isTitleOpen}
         clearOnSave
       />
     </div>

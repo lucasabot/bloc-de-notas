@@ -42,3 +42,9 @@ export const buttonsFunctions = (
   ]
     .find(({ type }) => type === effect)
     .action();
+
+export const calcIfButtonDisabled = (key, canSave, isTextOpen, isTitleOpen, canApplyStyles) => {
+  if (isTextOpen || isTitleOpen) return true;
+  if (key === 'SAVE' && !canSave) return true;
+  if ((key === 'BOLD' || key === 'ITALIC') && !canApplyStyles) return true;
+};

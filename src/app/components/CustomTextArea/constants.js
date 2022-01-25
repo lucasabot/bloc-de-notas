@@ -1,4 +1,2 @@
-const TEXTAREA_ROWS = 10;
-const TEXTAREA_COLS = 30;
-
-export { TEXTAREA_COLS, TEXTAREA_ROWS };
+export const TEXTAREA_ROWS = 10;
+export const TEXTAREA_COLS = 30;

@@ -3,7 +3,7 @@ import { string, shape, number } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
-import useToastContext from 'utils/hooks/useToastContext';
+import useToastContext from 'hooks/useToastContext';
 import { handleTextStyle, countWords } from 'utils/functionUtils';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
@@ -16,6 +16,7 @@ const NoteItem = ({ note }) => {
   const [titleValue, setTitleValue] = useState(note.title);
   const [textValue, setTextValue] = useState(note.text);
   const [textClassNames, setTextClassNames] = useState([]);
+  const [isTitleOpen, setIsTitleOpen] = useState(false);
 
   const addToast = useToastContext();
 
@@ -57,6 +58,7 @@ const NoteItem = ({ note }) => {
         type="text"
         className={styles.noteItemTitle}
         onChange={handleTitleChange}
+        setIsTitleOpen={setIsTitleOpen}
       />
 
       <InlineTextArea
@@ -70,6 +72,7 @@ const NoteItem = ({ note }) => {
         textClassNames={textClassNames}
         onSave={handleModification}
         canSave={textValue?.length > 0 && titleValue?.length > 0}
+        isTitleOpen={isTitleOpen}
         classNames={{
           span: styles.noteItemTextSpan,
           textArea: styles.noteItemTextArea,

@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { string, number, func, arrayOf, bool, shape } from 'prop-types';
 import i18 from 'i18next';
 
-import useToastContext from 'utils/hooks/useToastContext';
+import useToastContext from 'hooks/useToastContext';
 import ButtonContainer from 'app/components/ButtonContainer';
 import NotepadButton from 'app/components/NotepadButton';
 import CustomTextArea from 'app/components/CustomTextArea';
@@ -24,6 +24,7 @@ const InlineTextArea = ({
   onSave,
   clearOnSave,
   canSave,
+  isTitleOpen,
   ...others
 }) => {
   const [open, setOpen] = useState(false);
@@ -73,7 +74,7 @@ const InlineTextArea = ({
             onClick={() => handleNotePadButtons(item.key)}
             key={item.key}
             className={item.className}
-            disabled={(item.key === 'SAVE' && !canSave) || open}
+            disabled={(item.key === 'SAVE' && !canSave) || !value?.length > 0 || open || isTitleOpen}
           />
         ))}
       </ButtonContainer>
@@ -91,6 +92,7 @@ InlineTextArea.propTypes = {
   onBlur: func,
   onSave: func,
   clearOnSave: bool,
+  isTitleOpen: bool,
   canSave: bool,
   textClassNames: arrayOf(string),
   classNames: shape({

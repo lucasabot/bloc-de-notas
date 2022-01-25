@@ -25,9 +25,7 @@ export default {
       titleInput: 'Ingrese un titulo',
       textInput: 'Ingrese su texto',
       inlineTextArea: {
-        words: 'Palabras',
-        emptyTitle: 'El contenido no puede estar vacio',
-        emptyText: 'El titulo no puede estar vacio'
+        words: 'Palabras'
       },
       deleteNote: 'X'
     },
