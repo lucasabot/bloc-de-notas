@@ -1,4 +1,5 @@
 import { createTypes, completeTypes } from 'redux-recompose';
+import i18 from 'i18next';
 
 import NotesService from 'services/NotesService';
 
@@ -35,29 +36,44 @@ export const actionCreators = {
       target: 'saveNote'
     });
     const response = await NotesService.createNote(payload);
+    const { addToast } = payload;
     if (response.ok) {
-      dispatch(privateActionsCreators.saveNoteSuccess(response.data));
+      dispatch(privateActionsCreators.saveNoteSuccess(response));
+      addToast(i18.t('DefaultMessages:saveNoteSuccess', { title: payload.title }));
     } else {
       dispatch(privateActionsCreators.saveNoteFailure(response.error));
+      addToast(i18.t('DefaultMessages:saveNoteFailure', { title: payload.title, error: response.error }), {
+        style: 'danger'
+      });
     }
   },
   deleteNote: payload => async dispatch => {
     dispatch({ type: actions.DELETE_NOTE, payload, target: 'deleteNote' });
     const response = await NotesService.deleteNote(payload.id);
+    const { addToast } = payload;
     if (response.ok) {
       dispatch(privateActionsCreators.deleteNoteSuccess(response.data));
       dispatch(privateActionsCreators.deleteInRedux(payload));
+      addToast(i18.t('DefaultMessages:deleteNoteSuccess', { title: payload.title }));
     } else {
       dispatch(privateActionsCreators.deleteNoteFailure(response.error));
+      addToast(i18.t('DefaultMessages:deleteNoteFailure', { title: payload.title, error: response.error }), {
+        style: 'danger'
+      });
     }
   },
   modifyNote: payload => async dispatch => {
     dispatch({ type: actions.MODIFY_NOTE, payload, target: 'modifyNote' });
     const response = await NotesService.modifyNote(payload);
+    const { addToast } = payload;
     if (response.ok) {
       dispatch(privateActionsCreators.modifyNoteSuccess(response.data));
+      addToast(i18.t('DefaultMessages:saveNoteSuccess', { title: payload.title }));
     } else {
       dispatch(privateActionsCreators.modifyNotesFailure(response.error));
+      addToast(i18.t('DefaultMessages:saveNoteFailure', { title: payload.title, error: response.error }), {
+        style: 'danger'
+      });
     }
   }
 };

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import i18 from 'i18next';
 
+import useToastContext from 'hooks/useToastContext';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
 import NotesActions from 'redux/notes/actions';
 import { countWords } from 'utils/functionUtils';
+import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
 
 import styles from './styles.module.scss';
 
@@ -15,9 +17,11 @@ const Bloc = () => {
   const [italic, setItalic] = useState(false);
   const [bold, setBold] = useState(false);
 
+  const addToast = useToastContext();
+
   const setTextStyle = textStyle => {
-    if (textStyle === 'bold') setBold(!bold);
-    if (textStyle === 'italic') setItalic(!italic);
+    if (textStyle === NOTEPAD_ACTIONS.bold) setBold(!bold);
+    if (textStyle === NOTEPAD_ACTIONS.italic) setItalic(!italic);
   };
   const [isTitleOpen, setIsTitleOpen] = useState(false);
 
@@ -26,7 +30,7 @@ const Bloc = () => {
   const handleTitleChange = e => setTitleValue(e.target.value);
 
   const handleSaveNote = () => {
-    dispatch(NotesActions.saveNote({ title: titleValue, content: textValue, italic, bold }));
+    dispatch(NotesActions.saveNote({ title: titleValue, content: textValue, italic, bold, addToast }));
     setTitleValue('');
     setItalic(false);
     setBold(false);

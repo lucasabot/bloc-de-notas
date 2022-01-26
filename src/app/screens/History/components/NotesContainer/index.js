@@ -1,5 +1,5 @@
 import React from 'react';
-import UTLabel from '@widergy/energy-ui/dist/components/UTLabel';
+import { UTLabel } from '@widergy/energy-ui';
 import i18 from 'i18next';
 import { number, string, shape, arrayOf, bool } from 'prop-types';
 
@@ -18,7 +18,7 @@ const NotesContainer = ({ notes }) =>
       {notes.notes?.length > 0 ? (
         notes.notes?.map(note => <NoteItem key={note.id} note={note} />)
       ) : (
-        <UTLabel className={styles.notesContainerEmptyMsg} medium gray>
+        <UTLabel className={styles.emptyMessageContainer} medium gray>
           {i18.t('History:empty')}
           {notes.notesError && i18.t(notes.notesError)}
         </UTLabel>

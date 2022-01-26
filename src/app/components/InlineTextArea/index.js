@@ -60,14 +60,16 @@ const InlineTextArea = ({
             onClick={toggleOpen}
             onKeyDown={toggleOpen}
           >
-            {`${value || placeholder}`}
+            {value || placeholder}
           </div>
         </div>
       )}
       <ButtonContainer className={`${classNames.buttonContainer}`}>
-        <span className={`${styles.wordsQuantitySpan} `}>{`${i18.t(
-          'Bloc:inlineTextArea:words'
-        )}: ${wordsQuantity}`}</span>
+        <span className={`${styles.wordsQuantitySpan}`}>
+          {i18.t('Bloc:inlineTextArea:words', {
+            wordsQuantity
+          })}
+        </span>
         {buttonsArray.map(item => (
           <NotepadButton
             buttonText={item.buttonText}

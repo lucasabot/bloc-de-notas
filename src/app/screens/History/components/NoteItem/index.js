@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { string, shape, number } from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { string, shape, number, bool } from 'prop-types';
+import { useDispatch, connect } from 'react-redux';
 import i18 from 'i18next';
 
 import { countWords } from 'utils/functionUtils';
@@ -9,10 +9,12 @@ import InlineTextArea from 'app/components/InlineTextArea';
 import useToastContext from 'utils/hooks/useToastContext';
 import NotepadButton from 'app/components/NotepadButton';
 import NotesActions from 'redux/notes/actions';
+import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
+import { loadingSelector } from 'redux/notes/selectors';
 
 import styles from './styles.module.scss';
 
-const NoteItem = ({ note }) => {
+const NoteItem = ({ note, loading }) => {
   const [titleValue, setTitleValue] = useState(note.title);
   const [textValue, setTextValue] = useState(note.content);
   const [italic, setItalic] = useState(note.italic);
@@ -23,14 +25,12 @@ const NoteItem = ({ note }) => {
 
   const dispatch = useDispatch();
 
-  const deleteNoteLoading = useSelector(state => state.notes.deleteNoteLoading);
-
   const handleTitleChange = e => setTitleValue(e.target.value);
   const handleTextChange = e => setTextValue(e.target.value);
 
   const setTextStyle = textStyle => {
-    if (textStyle === 'bold') setBold(!bold);
-    if (textStyle === 'italic') setItalic(!italic);
+    if (textStyle === NOTEPAD_ACTIONS.bold) setBold(!bold);
+    if (textStyle === NOTEPAD_ACTIONS.italic) setItalic(!italic);
   };
 
   const handleModification = () => {
@@ -45,8 +45,7 @@ const NoteItem = ({ note }) => {
   };
 
   const handleSelfDelete = () => {
-    dispatch(NotesActions.deleteNote(note));
-    addToast(i18.t('DefaultMessages:deleteNoteSuccess', { title: note.title }), { style: 'danger' });
+    dispatch(NotesActions.deleteNote({ ...note, addToast }));
   };
 
   return (
@@ -55,7 +54,7 @@ const NoteItem = ({ note }) => {
         buttonText={i18.t('Bloc:deleteNote')}
         onClick={handleSelfDelete}
         className={styles.noteItemDeleteButton}
-        disabled={deleteNoteLoading}
+        disabled={loading}
       />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
@@ -95,7 +94,12 @@ NoteItem.propTypes = {
     text: string,
     className: string,
     id: number
-  })
+  }),
+  loading: bool
 };
 
-export default NoteItem;
+const mapDispatchToProps = state => ({
+  loading: loadingSelector(state)
+});
+
+export default connect(mapDispatchToProps)(NoteItem);

@@ -18,7 +18,7 @@ const Topbar = ({ disableButtons }) => {
 
   const goTo = useCallback(route => dispatch(push(route)), [dispatch, push]);
 
-  const buttonsArray = arrayButtons(goTo, pathName);
+  const buttonsArray = arrayButtons(goTo, pathName, disableButtons);
 
   return (
     <div className={styles.container}>
@@ -39,7 +39,7 @@ const Topbar = ({ disableButtons }) => {
 };
 
 const mapDispatchToProps = state => ({
-  disableButtons: state.notes.notesLoading || state.notes.saveNotesLoading || state.notes.deleteNotesLoading
+  disableButtons: state.notes.notesLoading || state.notes.saveNoteLoading || state.notes.deleteNoteLoading
 });
 
 Topbar.propTypes = {
