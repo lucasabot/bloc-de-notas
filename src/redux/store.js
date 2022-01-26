@@ -30,15 +30,11 @@ const deleteValue = (state, action) => {
   return state;
 };
 
-const form = formReducer.plugin({
-  UTFORM: deleteValue
-});
-
 const reducers = combineReducers({
   characters,
   notes,
   router: connectRouter(history),
-  form
+  form: formReducer
 });
 
 const middlewares = [routerMiddleware(history)];
