@@ -1,0 +1,86 @@
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_colors.scss';
+
+%baseStyles {
+  border: 0;
+  border-bottom: 1px solid $gray;
+  font-family: 'Poppins', sans-serif;
+  font-size: $large !important;
+  margin: 10px;
+  resize: none;
+  width: 450px;
+}
+
+%baseStylesFocus {
+  border: none;
+  border-bottom: 1px solid $primary-button;
+  font-family: 'Poppins', sans-serif;
+  outline: none !important;
+  resize: none;
+}
+
+.formInput {
+  @extend %baseStyles;
+  margin: 10px;
+  width: 450px;
+}
+
+
+.formInput[type=number]::-webkit-outer-spin-button,
+.formInput[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+.formInput:focus {
+  @extend %baseStylesFocus
+}
+
+.formTextArea {
+  @extend %baseStyles;
+  width: 450px;
+}
+
+.formTextArea:focus {
+  @extend %baseStylesFocus
+}
+
+.row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 100px;
+  width: 100%;
+}
+
+.buttonContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: 100px;
+  width: 450px;
+}
+
+%formButtons {
+  margin: 0 5px;
+}
+
+.formButtonSubmit {
+  @extend %formButtons;
+}
+
+.formButtonCancel {
+  @extend %formButtons;
+  color: $delete-button !important;
+  //background-color: $delete-button !important;
+}
+
+
+.formButtonCancel:hover {
+  @extend %formButtons;
+  background-color: $delete-button-text !important;
+}

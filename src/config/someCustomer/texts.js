@@ -5,7 +5,8 @@ export default {
       backHomeButton: '↩ Home',
       goHome: 'Inicio',
       goBloc: 'Bloc',
-      goHistory: 'Historia'
+      goHistory: 'Historia',
+      goQuiz: 'Encuesta'
     },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
@@ -34,7 +35,9 @@ export default {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
     },
-
+    Quiz: {
+      title: 'Encuesta'
+    },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,

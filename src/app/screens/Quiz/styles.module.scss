@@ -12,49 +12,14 @@
   width: 100%;
 }
 
+.quizTitle {
+  margin-bottom: 50px;
+}
+
 .form {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-}
-
-%baseStyles {
-  border: 0;
-  border-bottom: 1px solid $gray;
-  font-size: $large !important;
-}
-
-%baseStylesFocus {
-  border: none;
-  border-bottom: 1px solid $primary-button;
-  outline: none !important;
-}
-
-.formInput {
-  @extend %baseStyles;
-  margin: 10px;
-  max-width: 200px !important;
-}
-
-.formInput:focus {
-  @extend %baseStylesFocus
-}
-
-.formTextArea {
-  @extend %baseStyles;
-  width: 100%;
-}
-
-.formTextArea:focus {
-  @extend %baseStylesFocus
-}
-
-.row {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
+  width: 600px;
 }

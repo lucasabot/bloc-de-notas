@@ -1,6 +1,6 @@
 import i18 from 'i18next';
 
-import { HOME, HISTORY, BLOC } from 'constants/routes';
+import { HOME, HISTORY, BLOC, QUIZ } from 'constants/routes';
 
 import styles from './styles.module.scss';
 
@@ -33,5 +33,11 @@ export const arrayButtons = (goTo, pathName) => [
     className: styles.topBarButton,
     onPress: () => goTo(HISTORY),
     disabled: checkButtonDisabled(HISTORY, pathName)
+  },
+  {
+    label: i18.t('Topbar:goQuiz'),
+    className: styles.topBarButton,
+    onPress: () => goTo(QUIZ),
+    disabled: checkButtonDisabled(QUIZ, pathName)
   }
 ];

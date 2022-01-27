@@ -1,0 +1,17 @@
+@import "config/someCustomer/scss/_colors.scss";
+
+.inputForm {
+  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputFormError {
+  border-bottom: 1px solid $delete-button !important;
+  color: $delete-button !important;
+}
+
+.errorMessage {
+  color: $delete-button;
+}
