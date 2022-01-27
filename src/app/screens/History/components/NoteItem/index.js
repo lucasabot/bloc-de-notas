@@ -29,8 +29,12 @@ const NoteItem = ({ note, loading }) => {
   const handleTextChange = e => setTextValue(e.target.value);
 
   const setTextStyle = textStyle => {
-    if (textStyle === NOTEPAD_ACTIONS.bold) setBold(!bold);
-    if (textStyle === NOTEPAD_ACTIONS.italic) setItalic(!italic);
+    if (textStyle === NOTEPAD_ACTIONS.CLEAN_STYLE) {
+      setBold(false);
+      setItalic(false);
+    }
+    if (textStyle === NOTEPAD_ACTIONS.BOLD) setBold(!bold);
+    if (textStyle === NOTEPAD_ACTIONS.ITALIC) setItalic(!italic);
   };
 
   const handleModification = () => {

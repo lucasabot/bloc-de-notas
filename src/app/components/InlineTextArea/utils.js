@@ -17,17 +17,17 @@ export const buttonsFunctions = (effect, onSave, clearValue, clearOnSave, setTex
     {
       type: NOTEPAD_ACTIONS.CLEAR,
       action: () => {
-        setTextStyle(NOTEPAD_ACTIONS.clear);
+        setTextStyle(NOTEPAD_ACTIONS.CLEAR);
         clearValue();
       }
     },
     {
       type: NOTEPAD_ACTIONS.ITALIC,
-      action: () => setTextStyle(NOTEPAD_ACTIONS.italic)
+      action: () => setTextStyle(NOTEPAD_ACTIONS.ITALIC)
     },
     {
       type: NOTEPAD_ACTIONS.BOLD,
-      action: () => setTextStyle(NOTEPAD_ACTIONS.bold)
+      action: () => setTextStyle(NOTEPAD_ACTIONS.BOLD)
     },
     {
       type: NOTEPAD_ACTIONS.DELETE,

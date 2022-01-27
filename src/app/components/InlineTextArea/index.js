@@ -1,7 +1,8 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { string, number, func, bool, shape } from 'prop-types';
 import i18 from 'i18next';
 
+import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
 import ButtonContainer from 'app/components/ButtonContainer';
 import useToastContext from 'utils/hooks/useToastContext';
 import NotepadButton from 'app/components/NotepadButton';
@@ -38,6 +39,10 @@ const InlineTextArea = ({
 
   const handleNotePadButtons = buttonPresed =>
     buttonsFunctions(buttonPresed, onSave, clearValue, clearOnSave, setTextStyle, deleteLastChar, addToast);
+
+  useEffect(() => {
+    if (value.length === 0) setTextStyle(NOTEPAD_ACTIONS.CLEAN_STYLE);
+  }, [value]);
 
   return (
     <Fragment>

@@ -20,8 +20,12 @@ const Bloc = () => {
   const addToast = useToastContext();
 
   const setTextStyle = textStyle => {
-    if (textStyle === NOTEPAD_ACTIONS.bold) setBold(!bold);
-    if (textStyle === NOTEPAD_ACTIONS.italic) setItalic(!italic);
+    if (textStyle === NOTEPAD_ACTIONS.CLEAN_STYLE) {
+      setBold(false);
+      setItalic(false);
+    }
+    if (textStyle === NOTEPAD_ACTIONS.BOLD) setBold(!bold);
+    if (textStyle === NOTEPAD_ACTIONS.ITALIC) setItalic(!italic);
   };
   const [isTitleOpen, setIsTitleOpen] = useState(false);
 

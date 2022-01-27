@@ -1,12 +1,8 @@
 export const NOTEPAD_ACTIONS = {
   BOLD: 'BOLD',
-  bold: 'bold',
   ITALIC: 'ITALIC',
-  italic: 'italic',
   CLEAR: 'CLEAR',
-  clear: 'clear',
+  CLEAN_STYLE: 'CLEAN_STYLE',
   DELETE: 'DELETE',
-  delete: 'delete',
-  SAVE: 'SAVE',
-  save: 'save'
+  SAVE: 'SAVE'
 };

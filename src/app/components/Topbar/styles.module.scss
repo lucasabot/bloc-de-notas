@@ -81,3 +81,10 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
 .topBarButton:disabled {
   color: $white !important;
 }
+
+.loading {
+  color: $gray !important;
+  margin: 0 3px !important;
+  max-height: 80px !important;
+  opacity: 0.6;
+}
