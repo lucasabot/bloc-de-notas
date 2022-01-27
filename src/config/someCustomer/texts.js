@@ -30,13 +30,18 @@ export default {
       },
       deleteNote: 'X'
     },
-
+    Survey: {
+      title: 'Encuesta',
+      nameInput: 'Ingrese su Nombre',
+      lastNameInput: 'Ingrese su Apellido',
+      contentInput: 'Ingrese una devolucion',
+      phoneInput: 'Ingrese su Telefono',
+      saveButton: 'GUARDAR',
+      cancelButton: 'CANCELAR'
+    },
     History: {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
-    },
-    Survey: {
-      title: 'Encuesta'
     },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
@@ -45,7 +50,7 @@ export default {
       saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
       saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
       saveSurveySuccess: `Se guardo la encuesta correctamente.`,
-      saveSurveyFailure: `No se pudo guardar la encuesta. \n `
+      saveSurveyFailure: `No se pudo guardar la encuesta. \n {{error}} `
     }
   }
 };

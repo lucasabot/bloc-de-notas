@@ -1,5 +1,6 @@
 import { createTypes, completeTypes } from 'redux-recompose';
 import i18 from 'i18next';
+import { reset } from 'redux-form';
 
 import SurveyService from 'services/SurveyService';
 
@@ -20,10 +21,11 @@ export const actionCreators = {
     const { addToast } = payload;
     if (response.ok) {
       dispatch(privateActionsCreators.saveSurveySuccess(response));
-      addToast(i18.t('DefaultMessages:saveSurveySuccess', { title: 'SURVEY' }));
+      addToast(i18.t('DefaultMessages:saveSurveySuccess'));
+      dispatch(reset('surveyForm'));
     } else {
       dispatch(privateActionsCreators.saveSurveyFailure(response.error));
-      addToast(i18.t('DefaultMessages:saveSurveyFailure', { title: 'SURVEY', error: response.error }), {
+      addToast(i18.t('DefaultMessages:saveSurveyFailure', { error: response.error }), {
         style: 'danger'
       });
     }

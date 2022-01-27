@@ -1,6 +1,3 @@
-const oneOf = (permissedValues, value) =>
-  value.split('').every(char => permissedValues.find(permissedChar => permissedChar === char));
-
 export const required = value => (value || typeof value === 'number' ? undefined : 'Required');
 
 export const phoneNumber = value =>

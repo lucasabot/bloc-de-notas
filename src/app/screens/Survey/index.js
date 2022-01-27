@@ -5,14 +5,17 @@ import { UTLabel } from '@widergy/energy-ui';
 
 import ReduxForm from 'app/components/ReduxForm';
 import SurveyActions from 'redux/survey/actions';
+import useToastContext from 'utils/hooks/useToastContext';
 
 import styles from './styles.module.scss';
 
 const Survey = () => {
   const dispatch = useDispatch();
 
+  const addToast = useToastContext();
+
   const handleSubmit = values => {
-    dispatch(SurveyActions.saveSurvey(values));
+    dispatch(SurveyActions.saveSurvey({ ...values, addToast }));
   };
 
   return (

@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const surveyApi = create({
-  baseURL: 'https://notes-api-for-practicing.herokuapp.com/api',
+  baseURL: 'https://private-05325-widergytraining.apiary-mock.com',
   timeout: 30000
 });
 
