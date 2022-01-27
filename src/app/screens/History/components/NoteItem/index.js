@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
-import { string, shape, number } from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { string, shape, number, bool } from 'prop-types';
+import { useDispatch, connect } from 'react-redux';
 import i18 from 'i18next';
 
-import useToastContext from 'hooks/useToastContext';
-import { handleTextStyle, countWords } from 'utils/functionUtils';
+import { countWords } from 'utils/functionUtils';
 import InlineInput from 'app/components/InlineInput';
 import InlineTextArea from 'app/components/InlineTextArea';
+import useToastContext from 'utils/hooks/useToastContext';
 import NotepadButton from 'app/components/NotepadButton';
 import NotesActions from 'redux/notes/actions';
+import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
+import { loadingSelector } from 'redux/notes/selectors';
 
 import styles from './styles.module.scss';
 
-const NoteItem = ({ note }) => {
+const NoteItem = ({ note, loading }) => {
   const [titleValue, setTitleValue] = useState(note.title);
-  const [textValue, setTextValue] = useState(note.text);
-  const [textClassNames, setTextClassNames] = useState([]);
+  const [textValue, setTextValue] = useState(note.content);
+  const [italic, setItalic] = useState(note.italic);
+  const [bold, setBold] = useState(note.bold);
   const [isTitleOpen, setIsTitleOpen] = useState(false);
 
   const addToast = useToastContext();
@@ -25,24 +28,28 @@ const NoteItem = ({ note }) => {
   const handleTitleChange = e => setTitleValue(e.target.value);
   const handleTextChange = e => setTextValue(e.target.value);
 
-  const setTextStyle = textStyle => setTextClassNames(handleTextStyle(textStyle, textClassNames));
-
-  const handleSelfDelete = () => {
-    dispatch(NotesActions.deleteNote(note));
-    addToast(i18.t('DefaultMessages:deleteNoteSuccess', { title: note.title }), { style: 'danger' });
+  const setTextStyle = textStyle => {
+    if (textStyle === NOTEPAD_ACTIONS.CLEAN_STYLE) {
+      setBold(false);
+      setItalic(false);
+    }
+    if (textStyle === NOTEPAD_ACTIONS.BOLD) setBold(!bold);
+    if (textStyle === NOTEPAD_ACTIONS.ITALIC) setItalic(!italic);
   };
 
   const handleModification = () => {
-    if (titleValue !== note.title || textValue !== note.text || textClassNames !== note.style) {
-      dispatch(
-        NotesActions.modifyNote({
-          title: titleValue,
-          text: textValue,
-          style: textClassNames,
-          id: note.id
-        })
-      );
+    if (
+      titleValue !== note.title ||
+      textValue !== note.text ||
+      bold !== note.bold ||
+      italic !== note.italic
+    ) {
+      dispatch(NotesActions.modifyNote({ content: textValue, title: titleValue, bold, italic, id: note.id }));
     }
+  };
+
+  const handleSelfDelete = () => {
+    dispatch(NotesActions.deleteNote({ ...note, addToast }));
   };
 
   return (
@@ -51,6 +58,7 @@ const NoteItem = ({ note }) => {
         buttonText={i18.t('Bloc:deleteNote')}
         onClick={handleSelfDelete}
         className={styles.noteItemDeleteButton}
+        disabled={loading}
       />
       <InlineInput
         placeholder={titleValue || i18.t('Bloc:titleInput')}
@@ -69,7 +77,7 @@ const NoteItem = ({ note }) => {
         deleteLastChar={() => setTextValue(textValue.slice(0, -1))}
         wordsQuantity={textValue.length === 0 ? 0 : countWords(textValue)}
         setTextStyle={setTextStyle}
-        textClassNames={textClassNames}
+        textClassNames={{ italic, bold }}
         onSave={handleModification}
         canSave={textValue?.length > 0 && titleValue?.length > 0}
         isTitleOpen={isTitleOpen}
@@ -90,7 +98,12 @@ NoteItem.propTypes = {
     text: string,
     className: string,
     id: number
-  })
+  }),
+  loading: bool
 };
 
-export default NoteItem;
+const mapDispatchToProps = state => ({
+  loading: loadingSelector(state)
+});
+
+export default connect(mapDispatchToProps)(NoteItem);

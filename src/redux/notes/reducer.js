@@ -1,27 +1,19 @@
 import Immutable from 'seamless-immutable';
-import { createReducer } from 'redux-recompose';
+import { createReducer, completeReducer } from 'redux-recompose';
 
 import { actions } from './actions';
 
 export const defaultState = { notes: [] };
 
 const reducerDescription = {
-  [actions.SAVE_NOTE]: (state, action) => {
-    console.log({ state });
-    return state;
-  },
-  [actions.DELETE_NOTE]: (state, action) => state.filter(note => action.payload.id !== note.id),
-  [actions.MODIFY_NOTE]: (state, action) =>
-    state.map(note => {
-      if (note.id === action.payload.id) {
-        return Object.assign({ id: note.id }, action.payload);
-      }
-      return note;
+  primaryActions: [actions.GET_NOTES, actions.SAVE_NOTE, actions.MODIFY_NOTE, actions.DELETE_NOTE],
+  override: {
+    [actions.DELETE_IN_REDUX]: (state, action) => ({
+      ...state,
+      notes: state.notes.filter(note => note.id !== action.payload.id)
     }),
-  [actions.SAVE_USERNAME]: (state, action) => {
-    console.log({ state });
-    return { username: action.payload };
+    [actions.SAVE_USERNAME]: (state, action) => ({ ...state, username: action.payload })
   }
 };
 
-export const reducer = createReducer(Immutable(defaultState), reducerDescription);
+export const reducer = createReducer(Immutable(defaultState), completeReducer(reducerDescription));
