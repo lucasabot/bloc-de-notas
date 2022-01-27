@@ -40,7 +40,8 @@ export default {
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
       deleteNoteFailure: `No se pudo borrar la nota. \n {{error}}`,
       saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
-      saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`
+      saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
+      loadingMessage: 'Cargando...'
     }
   }
 };

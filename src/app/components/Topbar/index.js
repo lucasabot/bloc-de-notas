@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { bool } from 'prop-types';
 import { useLocation } from 'react-router';
-// import {} from '@widergy/energy-ui';
+import { i18 } from 'i18next';
 
 import logo from 'app/assets/logoBlanco.png';
 import { HOME } from 'constants/routes';
@@ -27,7 +27,7 @@ const Topbar = ({ dispatch, loading }) => {
       ))}
       {loading && (
         <UTLabel bold medium className={styles.loading}>
-          Cargando...
+          {i18.t('DefaultMessages:loadingMessage')}
         </UTLabel>
       )}
       <img
