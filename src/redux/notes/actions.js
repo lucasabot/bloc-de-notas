@@ -4,10 +4,7 @@ import i18 from 'i18next';
 import NotesService from 'services/NotesService';
 
 export const actions = createTypes(
-  completeTypes(
-    ['GET_NOTES', 'SAVE_NOTE', 'DELETE_NOTE', 'MODIFY_NOTE'],
-    ['DELETE_IN_REDUX', 'SAVE_USERNAME']
-  ),
+  completeTypes(['GET_NOTES', 'SAVE_NOTE', 'DELETE_NOTE', 'MODIFY_NOTE'], ['DELETE_IN_REDUX']),
   '@@NOTES'
 );
 
@@ -78,8 +75,7 @@ export const actionCreators = {
         style: 'danger'
       });
     }
-  },
-  saveUsername: payload => dispatch => dispatch({ type: actions.SAVE_USERNAME, payload, target: 'username' })
+  }
 };
 
 export default actionCreators;

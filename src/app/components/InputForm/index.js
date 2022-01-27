@@ -1,4 +1,3 @@
-import shape from '@material-ui/core/styles/shape';
 import { func, bool, objectOf, any, string, arrayOf } from 'prop-types';
 import React from 'react';
 import { Field } from 'redux-form';
@@ -7,7 +6,7 @@ import { ALTERNATIVE_INPUT_TYPES } from './constants';
 import styles from './styles.module.scss';
 
 const InputForm = ({ name, type, placeholder, validate, component, warn, className }) => {
-  console.log('object');
+  console.log('RE-RENDER-INPUT ', name);
   const renderField = ({ input, type, meta: { touched, error, warning } }) => (
     <div className={styles.inputForm}>
       {component === ALTERNATIVE_INPUT_TYPES.textarea.type ? (

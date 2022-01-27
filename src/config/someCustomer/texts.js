@@ -6,7 +6,7 @@ export default {
       goHome: 'Inicio',
       goBloc: 'Bloc',
       goHistory: 'Historia',
-      goQuiz: 'Encuesta'
+      goSurvey: 'Encuesta'
     },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
@@ -35,7 +35,7 @@ export default {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
     },
-    Quiz: {
+    Survey: {
       title: 'Encuesta'
     },
     DefaultMessages: {
@@ -43,7 +43,9 @@ export default {
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
       deleteNoteFailure: `No se pudo borrar la nota. \n {{error}}`,
       saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
-      saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`
+      saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
+      saveSurveySuccess: `Se guardo la encuesta correctamente.`,
+      saveSurveyFailure: `No se pudo guardar la encuesta. \n `
     }
   }
 };

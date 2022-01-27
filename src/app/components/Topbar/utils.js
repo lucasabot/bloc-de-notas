@@ -36,7 +36,7 @@ export const arrayButtons = (goTo, pathName, disableButtons) => [
     disabled: checkButtonDisabled(HISTORY, pathName)
   },
   {
-    label: i18.t('Topbar:goQuiz'),
+    label: i18.t('Topbar:goSurvey'),
     className: styles.topBarButton,
     onPress: () => goTo(QUIZ),
     disabled: checkButtonDisabled(QUIZ, pathName)

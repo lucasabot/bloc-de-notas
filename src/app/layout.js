@@ -10,7 +10,7 @@ import Home from './screens/Home';
 import Quotes from './screens/Quotes';
 import Bloc from './screens/Bloc';
 import History from './screens/History';
-import Quiz from './screens/Quiz';
+import Survey from './screens/Survey';
 import styles from './styles.module.scss';
 
 const App = () => (
@@ -22,7 +22,7 @@ const App = () => (
         <Route exact path={QUOTES} component={Quotes} />
         <Route exact path={BLOC} component={Bloc} />
         <Route exact path={HISTORY} component={History} />
-        <Route exact path={QUIZ} component={Quiz} />
+        <Route exact path={QUIZ} component={Survey} />
         <Route render={() => <Redirect to={HOME} />} />
       </Switch>
     </ConnectedRouter>

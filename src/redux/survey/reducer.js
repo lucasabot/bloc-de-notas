@@ -3,15 +3,12 @@ import { createReducer, completeReducer } from 'redux-recompose';
 
 import { actions } from './actions';
 
-export const defaultState = { notes: [] };
+export const defaultState = {};
 
 const reducerDescription = {
-  primaryActions: [actions.GET_NOTES, actions.SAVE_NOTE, actions.MODIFY_NOTE, actions.DELETE_NOTE],
+  primaryActions: [actions.SAVE_SURVEY],
   override: {
-    [actions.DELETE_IN_REDUX]: (state, action) => ({
-      ...state,
-      notes: state.notes.filter(note => note.id !== action.payload.id)
-    })
+    [actions.SAVE_USERNAME]: (state, action) => ({ ...state, username: action.payload })
   }
 };
 
