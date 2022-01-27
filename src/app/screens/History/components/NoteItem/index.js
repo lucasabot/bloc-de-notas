@@ -44,7 +44,16 @@ const NoteItem = ({ note, loading }) => {
       bold !== note.bold ||
       italic !== note.italic
     ) {
-      dispatch(NotesActions.modifyNote({ content: textValue, title: titleValue, bold, italic, id: note.id }));
+      dispatch(
+        NotesActions.modifyNote({
+          content: textValue,
+          title: titleValue,
+          bold,
+          italic,
+          id: note.id,
+          addToast
+        })
+      );
     }
   };
 
