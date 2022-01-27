@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { bool } from 'prop-types';
 import { useLocation } from 'react-router';
-import { i18 } from 'i18next';
+import i18 from 'i18next';
 
 import logo from 'app/assets/logoBlanco.png';
 import { HOME } from 'constants/routes';

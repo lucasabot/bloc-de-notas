@@ -3,7 +3,7 @@ import { string, number, any } from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { UTLabel } from '@widergy/energy-ui';
 import { withStyles } from '@material-ui/core/styles';
-import { i18 } from 'i18next';
+import i18 from 'i18next';
 
 import styles from './styles.module.scss';
 
