@@ -3,6 +3,7 @@ import { string, number, any } from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { UTLabel } from '@widergy/energy-ui';
 import { withStyles } from '@material-ui/core/styles';
+import i18 from 'i18next';
 
 import styles from './styles.module.scss';
 
@@ -10,7 +11,7 @@ const Loading = ({ className, thickness = 1.5, size = 85, containerSpinner }) =>
   <div className={`${styles.container} ${className}`} style={containerSpinner}>
     <CircularProgress className={styles.loading} size={size} thickness={thickness} />
     <UTLabel className={styles.text} black medium>
-      Cargando...
+      {i18.t('DefaultMessages:loadingMessage')}
     </UTLabel>
   </div>
 );

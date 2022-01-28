@@ -50,7 +50,8 @@ export default {
       saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
       saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
       saveSurveySuccess: `Se guardo la encuesta correctamente.`,
-      saveSurveyFailure: `No se pudo guardar la encuesta. \n {{error}} `
+      saveSurveyFailure: `No se pudo guardar la encuesta. \n {{error}} `,
+      loadingMessage: 'Cargando...'
     }
   }
 };
