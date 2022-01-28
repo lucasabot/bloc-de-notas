@@ -11,10 +11,11 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   box-shadow: $shadow;
   display: flex;
   height: $topbar-heigth;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 20px;
   width: 100%;
   @media #{$mobile} {
+    justify-content: space-evenly;
     padding: 10px 0;
   }
 }
