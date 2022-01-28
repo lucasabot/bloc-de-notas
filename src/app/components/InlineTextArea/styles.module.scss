@@ -1,5 +1,18 @@
-@import '../../../scss/index.scss';
 @import 'scss/variables/_mediaQueries.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'config/someCustomer/scss/_colors.scss';
+
+.span {
+  color: $gray;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  width: 30rem;
+  @media #{$mobile} {
+    height: 100%;
+    width: 100%;
+  }
+}
 
 .spanFontSize {
   font-size: $small;
@@ -58,6 +71,21 @@
 
 .saveButton span span {
   padding: 0 3px;
+  width: fit-content;
+}
+
+.saveButton {
+  background-color: $white !important;
+  box-shadow: inset 0px 0px 0px 1px #548cff;
+  margin: 0 0 0 auto;
+}
+
+.saveButton:hover {
+  background-color: rgba(84, 140, 255, 0.6) !important;
+}
+
+.saveButton span span {
+  padding: 0 3px 0 3px;
   width: fit-content;
 }
 

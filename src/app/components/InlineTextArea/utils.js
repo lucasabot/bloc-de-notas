@@ -1,42 +1,36 @@
-import i18 from 'i18next';
+import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
 
 import styles from './styles.module.scss';
 
-export const buttonsFunctions = (
-  effect,
-  onSave,
-  clearValue,
-  clearOnSave,
-  setTextStyle,
-  deleteLastChar,
-  addToast
-) =>
+export const calcTextClassNames = textStyles =>
+  `${textStyles.bold && styles.bold} ${textStyles.italic && styles.italic}`;
+
+export const buttonsFunctions = (effect, onSave, clearValue, clearOnSave, setTextStyle, deleteLastChar) =>
   [
     {
-      type: 'SAVE',
+      type: NOTEPAD_ACTIONS.SAVE,
       action: () => {
         onSave();
         if (clearOnSave) clearValue();
-        addToast(i18.t('DefaultMessages:addNoteSuccess'));
       }
     },
     {
-      type: 'CLEAR',
+      type: NOTEPAD_ACTIONS.CLEAR,
       action: () => {
-        setTextStyle('clear');
+        setTextStyle(NOTEPAD_ACTIONS.CLEAR);
         clearValue();
       }
     },
     {
-      type: 'ITALIC',
-      action: () => setTextStyle(styles.italic)
+      type: NOTEPAD_ACTIONS.ITALIC,
+      action: () => setTextStyle(NOTEPAD_ACTIONS.ITALIC)
     },
     {
-      type: 'BOLD',
-      action: () => setTextStyle(styles.bold)
+      type: NOTEPAD_ACTIONS.BOLD,
+      action: () => setTextStyle(NOTEPAD_ACTIONS.BOLD)
     },
     {
-      type: 'DELETE',
+      type: NOTEPAD_ACTIONS.DELETE,
       action: () => deleteLastChar()
     }
   ]
@@ -45,6 +39,6 @@ export const buttonsFunctions = (
 
 export const calcIfButtonDisabled = (key, canSave, isTextOpen, isTitleOpen, canApplyStyles) => {
   if (isTextOpen || isTitleOpen) return true;
-  if (key === 'SAVE' && !canSave) return true;
-  if ((key === 'BOLD' || key === 'ITALIC') && !canApplyStyles) return true;
+  if (key === NOTEPAD_ACTIONS.SAVE && !canSave) return true;
+  if ((key === NOTEPAD_ACTIONS.BOLD || key === NOTEPAD_ACTIONS.ITALIC) && !canApplyStyles) return true;
 };

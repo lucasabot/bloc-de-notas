@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'https://thesimpsonsquoteapi.glitch.me',
+  baseURL: 'https://notes-api-for-practicing.herokuapp.com/api',
   timeout: 30000
 });
 

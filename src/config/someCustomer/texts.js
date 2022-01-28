@@ -25,7 +25,7 @@ export default {
       titleInput: 'Ingrese un titulo',
       textInput: 'Ingrese su texto',
       inlineTextArea: {
-        words: 'Palabras'
+        words: 'Palabras: {{wordsQuantity}}'
       },
       deleteNote: 'X'
     },
@@ -38,7 +38,10 @@ export default {
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
-      addNoteSuccess: `Se guardo la nota {{title}} correctamente.`
+      deleteNoteFailure: `No se pudo borrar la nota. \n {{error}}`,
+      saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
+      saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
+      loadingMessage: 'Cargando...'
     }
   }
 };
