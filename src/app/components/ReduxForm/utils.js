@@ -1,14 +1,39 @@
+import i18 from 'i18next';
+
+import { numbers, phoneLength } from './constants';
+
 const validateCharacters = (permissedValues, value) =>
   value.split('').every(char => permissedValues.find(permissedChar => permissedChar === char));
 
-const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const required = (field, value) => {
+  if (!value || typeof value === 'number')
+    return {
+      [field]: i18.t('SurveyForm:requiredValidation')
+    };
+  return null;
+};
 
-export const required = value => (value || typeof value === 'number' ? undefined : 'Required');
+export const phoneNumber = (field, value) => {
+  if (value.length < phoneLength || !validateCharacters(numbers, value))
+    return { [field]: i18.t('SurveyForm:phoneValidation') };
+  return null;
+};
 
-export const phoneNumber = value =>
-  value.length < 10 || !validateCharacters(numbers, value)
-    ? 'Invalid phone number, must be 10 digits'
-    : undefined;
+export const justCharacters = (field, value) => {
+  if (value && !/([A-Z])$/i.test(value))
+    return {
+      [field]: i18.t('SurveyForm:charactersValidation')
+    };
+  return null;
+};
 
-export const justCharacters = value =>
-  value && !/([A-Z])$/i.test(value) ? 'Invalid name, must be just characters.' : undefined;
+export const validateSubmit = values => {
+  let errors = {};
+  Object.entries(values).forEach(inputValue => {
+    errors = { ...errors, ...required(inputValue[0], inputValue[1]) };
+    if (inputValue[0] === 'phone') errors = { ...errors, ...phoneNumber(inputValue[0], inputValue[1]) };
+    if (inputValue[0] === 'name') errors = { ...errors, ...justCharacters(inputValue[0], inputValue[1]) };
+    if (inputValue[0] === 'lastName') errors = { ...errors, ...justCharacters(inputValue[0], inputValue[1]) };
+  });
+  return errors;
+};

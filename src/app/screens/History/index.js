@@ -2,19 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { UTLabel } from '@widergy/energy-ui';
 import i18 from 'i18next';
-import { any, objectOf } from 'prop-types';
+import { any, objectOf, bool } from 'prop-types';
 
 import NotesActions from 'redux/notes/actions';
 
 import NotesContainer from './components/NotesContainer';
 import styles from './styles.module.scss';
 
-const History = ({ dispatch, notes }) => {
+const History = ({ dispatch, notes, modifyDone }) => {
   const getNotesFromAPI = () => dispatch(NotesActions.getNotes());
 
   useEffect(() => {
-    getNotesFromAPI();
-  }, []);
+    if (modifyDone) getNotesFromAPI();
+  }, [modifyDone]);
 
   return (
     <div className={styles.container}>
@@ -27,9 +27,13 @@ const History = ({ dispatch, notes }) => {
 };
 
 History.propTypes = {
-  notes: objectOf(any)
+  notes: objectOf(any),
+  modifyDone: bool
 };
 
-const mapDispatchToProps = state => ({ notes: state.notes });
+const mapDispatchToProps = state => ({
+  notes: state.notes,
+  modifyDone: !state.notes.modifyNoteLoading
+});
 
 export default connect(mapDispatchToProps)(History);

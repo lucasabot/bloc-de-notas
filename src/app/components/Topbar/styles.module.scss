@@ -15,7 +15,6 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   padding: 20px;
   width: 100%;
   @media #{$mobile} {
-    justify-content: space-evenly;
     padding: 10px 0;
   }
 }
@@ -48,6 +47,10 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
     max-width: 95px;
     object-fit: cover;
     padding: 3px 8px;
+  }
+
+  @media #{$small-mobile} {
+    display: none;
   }
 
 }
@@ -88,4 +91,8 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   margin: 0 3px !important;
   max-height: 80px !important;
   opacity: 0.6;
+  
+  @media #{$small-mobile} {
+    display: none;
+  }
 }

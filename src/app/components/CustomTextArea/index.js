@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { string, func } from 'prop-types';
 
-import { TEXTAREA_ROWS, TEXTAREA_COLS } from './constants';
+import { TEXTAREA_ROWS, TEXTAREA_COLS } from 'constants/textAreaSizing';
+
 import styles from './styles.module.scss';
 
 const CustomTextArea = ({ value, placeholder, classNames, toggle, onBlur, ...others }) => {

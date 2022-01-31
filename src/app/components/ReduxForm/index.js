@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { reduxForm, getFormValues } from 'redux-form';
+import { reduxForm, getFormValues, Field } from 'redux-form';
 import i18 from 'i18next';
 import { UTButton } from '@widergy/energy-ui';
 import { useHistory } from 'react-router';
@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 import { bool, func, string, shape } from 'prop-types';
 
 import SurveyActions from 'redux/survey/actions';
-import InputForm from 'app/components/InputForm';
 
+import SurveyField from './components/SurveyField';
+import { validateSubmit } from './utils';
 import { inputsArray } from './constants';
 import styles from './styles.module.scss';
 
@@ -19,7 +20,6 @@ const ReduxForm = ({
   savedUserName,
   currentValues,
   submitting,
-  invalid,
   pristine,
   className
 }) => {
@@ -38,13 +38,13 @@ const ReduxForm = ({
   return (
     <form className={className} onSubmit={handleSubmit}>
       {inputsArray.map(input => (
-        <div className={styles.row}>
-          <InputForm
+        <div key={input.name} className={styles.row}>
+          <Field
             name={input.name}
             placeholder={input.placeholder}
+            component={SurveyField}
             type={input.type}
-            validate={input.validate}
-            className={styles.formInput}
+            className={`${styles.formInput} ${input.type === 'textarea' && styles.formTextArea}`}
             disabled={input.name !== 'content' && (submitting || pristine)}
             rows={input.rows}
             cols={input.cols}
@@ -55,7 +55,7 @@ const ReduxForm = ({
         <UTButton className={styles.formButtonCancel} text onPress={() => handleCancel(currentValues)}>
           {i18.t('Survey:cancelButton')}
         </UTButton>
-        <UTButton disabled={invalid || pristine} type="submit" className={styles.formButtonSubmit}>
+        <UTButton disabled={pristine} type="submit" className={styles.formButtonSubmit}>
           {i18.t('Survey:saveButton')}
         </UTButton>
       </div>
@@ -74,7 +74,6 @@ ReduxForm.propTypes = {
   savedUserName: shape({ name: string, lastName: string }),
   currentValues: shape({ name: string, lastName: string, content: string }),
   submitting: bool,
-  invalid: bool,
   pristine: bool,
   className: string
 };
@@ -86,5 +85,6 @@ export default reduxForm({
     lastName: '',
     phone: '',
     content: ''
-  }
+  },
+  validate: validateSubmit
 })(connect(mapStateToProps)(ReduxForm));

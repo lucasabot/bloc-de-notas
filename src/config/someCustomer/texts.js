@@ -43,6 +43,11 @@ export default {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
     },
+    SurveyForm: {
+      requiredValidation: 'Este campo es requerido.',
+      phoneValidation: 'Numero invalido, debe tener al menos 10 digitos.',
+      charactersValidation: 'Campo invalido, deben ser solo caracteres alfabeticos.'
+    },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
