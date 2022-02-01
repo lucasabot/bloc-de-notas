@@ -41,14 +41,6 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   cursor: pointer;
   height: calc(#{$topbar-heigth} - 40px);
 
-  /* @media #{$mobile} {
-    height: auto;
-    margin-left: 0 !important;
-    max-width: 95px;
-    object-fit: cover;
-    padding: 3px 8px;
-  } */
-
   @media #{$mobile} {
     display: none;
   }
