@@ -12,6 +12,7 @@ import NotesActions from 'redux/notes/actions';
 import { NOTEPAD_ACTIONS } from 'constants/notepadActions';
 import { loadingSelector } from 'redux/notes/selectors';
 
+import { hasDifferences } from './utils';
 import styles from './styles.module.scss';
 
 const NoteItem = ({ note, loading }) => {
@@ -61,6 +62,11 @@ const NoteItem = ({ note, loading }) => {
     dispatch(NotesActions.deleteNote({ ...note, addToast }));
   };
 
+  const validationToSave =
+    textValue?.length > 0 &&
+    titleValue?.length > 0 &&
+    hasDifferences(note, { content: textValue, title: titleValue, italic, bold });
+
   return (
     <div className={styles.noteItemContainer}>
       <NotepadButton
@@ -88,7 +94,7 @@ const NoteItem = ({ note, loading }) => {
         setTextStyle={setTextStyle}
         textClassNames={{ italic, bold }}
         onSave={handleModification}
-        canSave={textValue?.length > 0 && titleValue?.length > 0}
+        canSave={validationToSave}
         isTitleOpen={isTitleOpen}
         classNames={{
           span: styles.noteItemTextSpan,

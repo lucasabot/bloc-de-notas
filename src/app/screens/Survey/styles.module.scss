@@ -1,0 +1,30 @@
+@import 'scss/variables/_sizes.scss';
+@import 'scss/variables/_fontSizes.scss';
+@import 'scss/variables/_mediaQueries.scss';
+@import '_colors.scss';
+
+.formContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px;
+  width: 100%;
+  
+  @media #{$small-mobile} {
+    padding: 20px
+  }
+}
+
+.surveyTitle {
+  margin-bottom: 50px;
+}
+
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+}

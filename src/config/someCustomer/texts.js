@@ -5,7 +5,8 @@ export default {
       backHomeButton: '↩ Home',
       goHome: 'Inicio',
       goBloc: 'Bloc',
-      goHistory: 'Historia'
+      goHistory: 'Historia',
+      goSurvey: 'Encuesta'
     },
     Home: {
       title: 'Bienvenido al bloc de notas del training de ABOT',
@@ -29,18 +30,32 @@ export default {
       },
       deleteNote: 'X'
     },
-
+    Survey: {
+      title: 'Encuesta',
+      nameInput: 'Ingrese su Nombre',
+      lastNameInput: 'Ingrese su Apellido',
+      contentInput: 'Ingrese una devolucion',
+      phoneInput: 'Ingrese su Telefono',
+      saveButton: 'GUARDAR',
+      cancelButton: 'CANCELAR'
+    },
     History: {
       title: 'Historial',
       empty: 'No hay notas guardadas.'
     },
-
+    SurveyForm: {
+      requiredValidation: 'Este campo es requerido.',
+      phoneValidation: 'Numero invalido, debe tener al menos 10 digitos.',
+      charactersValidation: 'Campo invalido, deben ser solo caracteres alfabeticos.'
+    },
     DefaultMessages: {
       getQuotesFailure: 'Hubo un error al recuperar los personajes!',
       deleteNoteSuccess: `Se borro la nota "{{title}}" correctamente.`,
       deleteNoteFailure: `No se pudo borrar la nota. \n {{error}}`,
       saveNoteSuccess: `Se guardo la nota "{{title}}" correctamente.`,
       saveNoteFailure: `No se pudo guardar la nota. \n {{error}}`,
+      saveSurveySuccess: `Se guardo la encuesta correctamente.`,
+      saveSurveyFailure: `No se pudo guardar la encuesta. \n {{error}} `,
       loadingMessage: 'Cargando...'
     }
   }

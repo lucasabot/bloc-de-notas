@@ -11,6 +11,7 @@ import eventDefinitions from 'constants/eventDefinitions';
 
 import { reducer as characters } from './characters/reducer';
 import { reducer as notes } from './notes/reducer';
+import { reducer as survey } from './survey/reducer';
 
 export const history = createBrowserHistory();
 
@@ -30,15 +31,12 @@ const deleteValue = (state, action) => {
   return state;
 };
 
-const form = formReducer.plugin({
-  UTFORM: deleteValue
-});
-
 const reducers = combineReducers({
   characters,
   notes,
+  survey,
   router: connectRouter(history),
-  form
+  form: formReducer
 });
 
 const middlewares = [routerMiddleware(history)];
