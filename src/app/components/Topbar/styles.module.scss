@@ -41,15 +41,15 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   cursor: pointer;
   height: calc(#{$topbar-heigth} - 40px);
 
-  @media #{$mobile} {
+  /* @media #{$mobile} {
     height: auto;
     margin-left: 0 !important;
     max-width: 95px;
     object-fit: cover;
     padding: 3px 8px;
-  }
+  } */
 
-  @media #{$small-mobile} {
+  @media #{$mobile} {
     display: none;
   }
 
@@ -77,13 +77,21 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   min-width: 80px !important;
 
   @media #{$small-mobile} {
+    font-size: $small;
     margin: 0px 1px;
-    padding: 3px 8px
+    padding: 3px 8px;
+    width: 15%;
   }
 }
 
 .topBarButton:disabled {
   color: $white !important;
+  @media #{$small-mobile} {
+    font-size: $small;
+    margin: 0px 1px;
+    padding: 3px 8px;
+    width: 15%;
+  }
 }
 
 .loading {
@@ -93,6 +101,10 @@ $shadow: 0 0 7px 0 rgba(122, 122, 122, 0.81);
   opacity: 0.6;
   
   @media #{$small-mobile} {
+    display: none;
+  }
+
+  @media #{$mobile} {
     display: none;
   }
 }
